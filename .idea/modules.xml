@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Bar-O-Maitre.iml" filepath="$PROJECT_DIR$/Bar-O-Maitre.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Bar-O-Maitre-grailsPlugins.iml" filepath="$PROJECT_DIR$/Bar-O-Maitre-grailsPlugins.iml" />
+    </modules>
+  </component>
+</project>
+
