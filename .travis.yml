@@ -1,4 +1,11 @@
 language: groovy
 jdk:
-  - oraclejdk7
-script: "./grailsw refresh-dependencies && ./grailsw test-app unit:"
+- oraclejdk7
+script: './grailsw refresh-dependencies && ./grailsw test-app unit:'
+deploy:
+  provider: heroku
+  api_key:
+    secure: kJNvq+FtpT13K17SEGKMvqcsrH5A2yvEL6LmcH2c7bEo16uiW5pRZKo4NCkLH/tJGtjUTF+Fe6zQuu/ZxGbQTGeu6SanTlZvZQ9fR977elToQZJnwZRAiL8lKGgWxBcCBVOD5afzKy2+sK3ZmtjmruKkzVh8K7LAdA4ft/LgoBQ=
+  app: Bar-O-Maitre
+  on:
+    repo: Mathsoum/Bar-O-Maitre

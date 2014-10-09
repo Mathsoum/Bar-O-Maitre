@@ -16,5 +16,7 @@ class DummyControllerSpec extends Specification {
     }
 
     void "test something"() {
+      expect: "Dummy test"
+      true
     }
 }

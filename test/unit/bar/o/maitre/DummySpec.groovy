@@ -14,7 +14,10 @@ class DummySpec extends Specification {
 
   def cleanup() {
   }
+  
 
   void "test something"() {
+    expect: "Dummy test"
+    true
   }
 }
