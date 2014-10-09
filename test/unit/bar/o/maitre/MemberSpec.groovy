@@ -6,18 +6,15 @@ import spock.lang.Specification
 /**
  * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
  */
-@TestFor(Dummy)
-class DummySpec extends Specification {
+@TestFor(Member)
+class MemberSpec extends Specification {
+    def setup() {
+    }
 
-  def setup() {
-  }
+    def cleanup() {
+    }
 
-  def cleanup() {
-  }
-  
+    def "test something"() {
 
-  void "test something"() {
-    expect: "Dummy test"
-    true
-  }
+    }
 }
