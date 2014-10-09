@@ -9,3 +9,4 @@ deploy:
   app: Bar-O-Maitre
   on:
     repo: Mathsoum/Bar-O-Maitre
+  strategy: git
