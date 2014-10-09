@@ -1,1 +1,4 @@
-script "echo Hello world"
+language: groovy
+jdk:
+  - oraclejdk7
+script: "./grailsw refresh-dependencies && ./grailsw test-app unit:"
