@@ -2,6 +2,9 @@ language: groovy
 jdk:
 - oraclejdk7
 script: './grailsw refresh-dependencies && ./grailsw test-app unit:'
+branches:
+  only:
+    - master
 deploy:
   provider: heroku
   api_key:
@@ -9,4 +12,5 @@ deploy:
   app: bar-o-maitre
   on:
     repo: Mathsoum/Bar-O-Maitre
+    branch: master
   strategy: git
