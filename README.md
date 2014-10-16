@@ -1,5 +1,4 @@
-Bar-O-Maitre
-============
+# Bar-O-Maitre [![Etat build travis](https://travis-ci.org/Mathsoum/Bar-O-Maitre.png)](https://travis-ci.org/Mathsoum/Bar-O-Maitre)
 
 Deviens le maître des bars toulousains !
 ----------------------------------------
