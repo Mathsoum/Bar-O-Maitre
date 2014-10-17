@@ -14,9 +14,3 @@ deploy:
     repo: Mathsoum/Bar-O-Maitre
     branch: master
   strategy: git
-
-after_success:
-    - ssh-keyscan -H -p 2276 vannier.pro,88.177.158.68 >> ~/.ssh/known_hosts
-    - ssh-keyscan -H -p 2276 vannier.pro >> ~/.ssh/known_hosts
-    - ssh-keyscan -H -p 2276 88.177.158.68 >> ~/.ssh/known_hosts
-    - ./launch_sonar_analysis.sh
