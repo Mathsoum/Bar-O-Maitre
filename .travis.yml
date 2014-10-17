@@ -15,8 +15,6 @@ deploy:
     branch: master
   strategy: git
 
--before_script:
-    - echo -e "Host vannier.pro\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
-
 after_success:
-    ./launch_sonar_analysis.sh
+    - ssh-keyscan -H -p '2276' 'vannier.pro' >> ~/.ssh/known_hosts
+    - ./launch_sonar_analysis.sh
