@@ -18,5 +18,13 @@ class User {
         use(TimeCategory) {
             birthDate max: (new Date() - 18.years)
         }
+
+        nickname validator: {
+           User.findByNickname(it) == null
+        }
+
+        mail validator: {
+            User.findByMail(it) == null
+        }
     }
 }
