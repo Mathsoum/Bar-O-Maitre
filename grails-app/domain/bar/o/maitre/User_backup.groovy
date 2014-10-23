@@ -2,7 +2,7 @@ package bar.o.maitre
 import groovy.time.*
 
 
-class User {
+class User_backup {
     String nickname
     String firstName
     String lastName
@@ -20,11 +20,11 @@ class User {
         }
 
         nickname validator: {
-           User.findByNickname(it) == null
+           User_backup.findByNickname(it) == null
         }
 
         mail validator: {
-            User.findByMail(it) == null
+            User_backup.findByMail(it) == null
         }
     }
 }

@@ -1,6 +1,12 @@
 package bar.o.maitre
 
+import grails.plugin.springsecurity.annotation.Secured
+
 class DummyController {
 
-  static scaffold = true
+    @Secured(['ROLE_ADMIN'])
+    def index()
+    {
+        render 'Secure access bro'
+    }
 }
