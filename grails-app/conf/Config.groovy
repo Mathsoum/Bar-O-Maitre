@@ -127,8 +127,7 @@ grails.plugin.springsecurity.authority.className = 'bar.o.maitre.Rank'
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	'/':                              ['permitAll'],
 	'/index':                         ['permitAll'],
-    '/dummy/index':                   ['permitAll'],
-    '/member/** ':                        ['permitAll'],
+    '/member/** ':                    ['permitAll'],
 	'/index.gsp':                     ['permitAll'],
 	'/assets/**':                     ['permitAll'],
 	'/**/js/**':                      ['permitAll'],
