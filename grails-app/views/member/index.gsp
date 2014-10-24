@@ -28,13 +28,13 @@
 					
 						<g:sortableColumn property="password" title="${message(code: 'member.password.label', default: 'Password')}" />
 					
-						<g:sortableColumn property="accountExpired" title="${message(code: 'member.accountExpired.label', default: 'Account Expired')}" />
+						<g:sortableColumn property="firstName" title="${message(code: 'member.firstName.label', default: 'First Name')}" />
 					
-						<g:sortableColumn property="accountLocked" title="${message(code: 'member.accountLocked.label', default: 'Account Locked')}" />
+						<g:sortableColumn property="lastName" title="${message(code: 'member.lastName.label', default: 'Last Name')}" />
 					
-						<g:sortableColumn property="enabled" title="${message(code: 'member.enabled.label', default: 'Enabled')}" />
+						<g:sortableColumn property="mail" title="${message(code: 'member.mail.label', default: 'Mail')}" />
 					
-						<g:sortableColumn property="passwordExpired" title="${message(code: 'member.passwordExpired.label', default: 'Password Expired')}" />
+						<g:sortableColumn property="birthDate" title="${message(code: 'member.birthDate.label', default: 'Birth Date')}" />
 					
 					</tr>
 				</thead>
@@ -46,13 +46,13 @@
 					
 						<td>${fieldValue(bean: memberInstance, field: "password")}</td>
 					
-						<td><g:formatBoolean boolean="${memberInstance.accountExpired}" /></td>
+						<td>${fieldValue(bean: memberInstance, field: "firstName")}</td>
 					
-						<td><g:formatBoolean boolean="${memberInstance.accountLocked}" /></td>
+						<td>${fieldValue(bean: memberInstance, field: "lastName")}</td>
 					
-						<td><g:formatBoolean boolean="${memberInstance.enabled}" /></td>
+						<td>${fieldValue(bean: memberInstance, field: "mail")}</td>
 					
-						<td><g:formatBoolean boolean="${memberInstance.passwordExpired}" /></td>
+						<td><g:formatDate date="${memberInstance.birthDate}" /></td>
 					
 					</tr>
 				</g:each>

@@ -41,6 +41,42 @@
 				</li>
 				</g:if>
 			
+				<g:if test="${memberInstance?.firstName}">
+				<li class="fieldcontain">
+					<span id="firstName-label" class="property-label"><g:message code="member.firstName.label" default="First Name" /></span>
+					
+						<span class="property-value" aria-labelledby="firstName-label"><g:fieldValue bean="${memberInstance}" field="firstName"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${memberInstance?.lastName}">
+				<li class="fieldcontain">
+					<span id="lastName-label" class="property-label"><g:message code="member.lastName.label" default="Last Name" /></span>
+					
+						<span class="property-value" aria-labelledby="lastName-label"><g:fieldValue bean="${memberInstance}" field="lastName"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${memberInstance?.mail}">
+				<li class="fieldcontain">
+					<span id="mail-label" class="property-label"><g:message code="member.mail.label" default="Mail" /></span>
+					
+						<span class="property-value" aria-labelledby="mail-label"><g:fieldValue bean="${memberInstance}" field="mail"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${memberInstance?.birthDate}">
+				<li class="fieldcontain">
+					<span id="birthDate-label" class="property-label"><g:message code="member.birthDate.label" default="Birth Date" /></span>
+					
+						<span class="property-value" aria-labelledby="birthDate-label"><g:formatDate date="${memberInstance?.birthDate}" /></span>
+					
+				</li>
+				</g:if>
+			
 				<g:if test="${memberInstance?.accountExpired}">
 				<li class="fieldcontain">
 					<span id="accountExpired-label" class="property-label"><g:message code="member.accountExpired.label" default="Account Expired" /></span>

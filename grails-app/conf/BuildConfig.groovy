@@ -87,5 +87,9 @@ grails.project.dependency.resolution = {
 
          // Authentification plugin
         compile ":spring-security-core:2.0-RC4"
+
+        // Cobertura plugin
+        test ":code-coverage:2.0.3-2"
+
     }
 }

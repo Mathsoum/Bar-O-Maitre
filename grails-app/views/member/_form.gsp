@@ -20,6 +20,42 @@
 
 </div>
 
+<div class="fieldcontain ${hasErrors(bean: memberInstance, field: 'firstName', 'error')} required">
+	<label for="firstName">
+		<g:message code="member.firstName.label" default="First Name" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:textField name="firstName" required="" value="${memberInstance?.firstName}"/>
+
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: memberInstance, field: 'lastName', 'error')} required">
+	<label for="lastName">
+		<g:message code="member.lastName.label" default="Last Name" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:textField name="lastName" required="" value="${memberInstance?.lastName}"/>
+
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: memberInstance, field: 'mail', 'error')} required">
+	<label for="mail">
+		<g:message code="member.mail.label" default="Mail" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:field type="email" name="mail" required="" value="${memberInstance?.mail}"/>
+
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: memberInstance, field: 'birthDate', 'error')} required">
+	<label for="birthDate">
+		<g:message code="member.birthDate.label" default="Birth Date" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:datePicker name="birthDate" precision="day"  value="${memberInstance?.birthDate}"  />
+
+</div>
+
 <div class="fieldcontain ${hasErrors(bean: memberInstance, field: 'accountExpired', 'error')} ">
 	<label for="accountExpired">
 		<g:message code="member.accountExpired.label" default="Account Expired" />

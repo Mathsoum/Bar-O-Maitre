@@ -26,18 +26,10 @@ class Member {
 		password blank: false
         firstName blank: false, nullable: false
         lastName blank: false, nullable: false
-        mail email:true
+        mail email:true, unique: true
 
         use(TimeCategory) {
             birthDate max: (new Date() - 18.years)
-        }
-
-        username validator: {
-            Member.findByUsername(it) == null
-        }
-
-        mail validator: {
-            Member.findByMail(it) == null
         }
 	}
 
