@@ -1,7 +1,5 @@
 <%@ page import="bar.o.maitre.Member; bar.o.maitre.Bar" %>
 
-
-
 <div class="fieldcontain ${hasErrors(bean: barInstance, field: 'barName', 'error')} required">
 	<label for="barName">
 		<g:message code="bar.barName.label" default="Bar Name" />
@@ -46,5 +44,3 @@
 	<g:textField name="price" required="" value="${barInstance?.price}"/>
 
 </div>
-
-

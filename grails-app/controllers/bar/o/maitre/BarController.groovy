@@ -19,7 +19,11 @@ class BarController {
     }
 
     def show(Bar barInstance) {
-        respond barInstance
+        boolean userCanModify = barInstance.admin == springSecurityService.currentUser
+        //TODO A user can modify a bar regarding his rank !!
+
+        render(view: "show", model: [barInstance: barInstance,
+                                     userCanModify: userCanModify])
     }
 
     @Secured("ROLE_ADMIN")
@@ -54,6 +58,7 @@ class BarController {
     }
 
     def edit(Bar barInstance) {
+        // TODO Secured by ACL bro !
         respond barInstance
     }
 
@@ -82,20 +87,25 @@ class BarController {
 
     @Transactional
     def delete(Bar barInstance) {
-
-        if (barInstance == null) {
-            notFound()
-            return
-        }
-
-        barInstance.delete flush: true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'Bar.label', default: 'Bar'), barInstance.id])
-                redirect action: "index", method: "GET"
+        if (barInstance.admin != springSecurityService.currentUser)
+        {
+            System.out.println("Impossible de delete")
+            redirect barInstance
+        } else {
+            if (barInstance == null) {
+                notFound()
+                return
             }
-            '*' { render status: NO_CONTENT }
+
+            barInstance.delete flush: true
+
+            request.withFormat {
+                form multipartForm {
+                    flash.message = message(code: 'default.deleted.message', args: [message(code: 'Bar.label', default: 'Bar'), barInstance.id])
+                    redirect action: "index", method: "GET"
+                }
+                '*' { render status: NO_CONTENT }
+            }
         }
     }
 

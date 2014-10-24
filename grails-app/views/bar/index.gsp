@@ -17,9 +17,12 @@
 		</div>
 		<div id="list-bar" class="content scaffold-list" role="main">
 			<h1><g:message code="default.list.label" args="[entityName]" /></h1>
-			<g:if test="${flash.message}">
-				<div class="message" role="status">${flash.message}</div>
-			</g:if>
+      <g:if test="${flash.message}">
+        <div class="message" role="status">${flash.message}</div>
+      </g:if>
+      <g:if test="${flash.error}">
+        <div class="errors" role="status">${flash.error}</div>
+      </g:if>
 			<table>
 			<thead>
 					<tr>
