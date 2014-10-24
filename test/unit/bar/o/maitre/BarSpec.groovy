@@ -9,9 +9,10 @@ import spock.lang.Unroll
  */
 @TestFor(Bar)
 class BarSpec extends Specification {
+    Bar barTest
 
     def setup() {
-
+        barTest = new Bar()
     }
 
     def cleanup() {
@@ -19,25 +20,37 @@ class BarSpec extends Specification {
 
     void "test creation of bar with correct attributes "() {
         given:"A correct bar"
-        Bar bar = new Bar(barName: "Acuda",description:"Poisson" ,type:"Bar tapas" ,
-                price:"tres cher", address: "3 rue du thon" )
+        barTest.barName = "Acuda"
+        barTest.description = "Poisson"
+        barTest.type = "Bar tapas"
+        barTest.price = "very expensive"
+        barTest.address = "3rd street tuna"
+
         when:"The bar is save on database"
-        bar.save()
+        def res = barTest.save()
+
         then:"The bar is not null"
-        bar != null
+        res != null
     }
+
     @Unroll
     void "test Create of bar with incorrect attributes "() {
         given:"An incorrect bar"
-        Bar barTest = new Bar()
+
+        barTest.barName = name
+        barTest.description = desc
+        barTest.type = typ
+        barTest.price = pric
+        barTest.address = addr
 
         when:"The bar is save on database"
-        barTest.save()
+        def res = barTest.save()
+
         then:""
-        barTest == resultat
+        res == resultat
 
         where:
-        barName | description | address | type | price | resultat
+        name | desc | addr | typ | pric | resultat
         "test" | "On decrit" | "address" | "Bar a vin" | "" | null
         "test" | "On decrit" | "address" | "Bar a vin" | null | null
         "test" | "On decrit" | "address" | "Bar a vin" | "  " | null
