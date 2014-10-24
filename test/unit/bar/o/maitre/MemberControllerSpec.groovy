@@ -37,8 +37,10 @@ class MemberControllerSpec extends Specification {
 
         when:"The save action is executed with an invalid instance"
             request.contentType = FORM_CONTENT_TYPE
+           // request.method = 'POST'
             def member = new Member()
             member.validate()
+
             controller.save(member)
 
         then:"The create view is rendered again with the correct model"
@@ -93,6 +95,7 @@ class MemberControllerSpec extends Specification {
     void "Test the update action performs an update on a valid domain instance"() {
         when:"Update is called for a domain instance that doesn't exist"
             request.contentType = FORM_CONTENT_TYPE
+           // request.method = 'PUT'
             controller.update(null)
 
         then:"A 404 error is returned"
@@ -124,6 +127,7 @@ class MemberControllerSpec extends Specification {
     void "Test that the delete action deletes an instance if it exists"() {
         when:"The delete action is called for a null instance"
             request.contentType = FORM_CONTENT_TYPE
+           // request.method = 'DELETE'
             controller.delete(null)
 
         then:"A 404 is returned"

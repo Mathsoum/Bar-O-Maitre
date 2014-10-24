@@ -1,11 +1,19 @@
 package bar.o.maitre
 
+import groovy.time.TimeCategory
+
 class Member {
 
 	transient springSecurityService
 
 	String username
 	String password
+
+    String firstName
+    String lastName
+    String mail
+    Date birthDate
+
 	boolean enabled = true
 	boolean accountExpired
 	boolean accountLocked
@@ -16,6 +24,21 @@ class Member {
 	static constraints = {
 		username blank: false, unique: true
 		password blank: false
+        firstName blank: false, nullable: false
+        lastName blank: false, nullable: false
+        mail email:true
+
+        use(TimeCategory) {
+            birthDate max: (new Date() - 18.years)
+        }
+
+        username validator: {
+            Member.findByUsername(it) == null
+        }
+
+        mail validator: {
+            Member.findByMail(it) == null
+        }
 	}
 
 	static mapping = {

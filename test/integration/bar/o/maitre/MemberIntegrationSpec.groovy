@@ -6,14 +6,14 @@ import spock.lang.Specification
 /**
  * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
  */
-@TestFor(User_backup)
-class User_backupIntegrationSpec extends Specification {
-    User_backup user1, userWithSameNick, userWithSameMail
+@TestFor(Member)
+class MemberIntegrationSpec extends Specification {
+    Member user1, userWithSameNick, userWithSameMail
 
     def setup() {
-        user1 = new User_backup(nickname:"mynick", firstName:"user1", lastName:"mylastname", mail:"user1@mail.mail", birthDate:new Date("1/1/1980"))
-        userWithSameNick = new User_backup(nickname:"mynick", firstName:"myfirstname", lastName:"mylastname", mail:"user2@mail.mail", birthDate:new Date("2/1/1980"))
-        userWithSameMail = new User_backup(nickname:"userWithSameMailThanUser1", firstName:"myfirstname", lastName:"mylastname", mail:"user1@mail.mail", birthDate:new Date("2/1/1980"))
+        user1 = new Member(username:"mynick", firstName:"user1", lastName:"mylastname", mail:"user1@mail.mail", birthDate:new Date("1/1/1980"), password: "coucou")
+        userWithSameNick = new Member(username:"mynick", firstName:"myfirstname", lastName:"mylastname", mail:"user2@mail.mail", birthDate:new Date("2/1/1980"),password: "coucou")
+        userWithSameMail = new Member(username:"userWithSameMailThanUser1", firstName:"myfirstname", lastName:"mylastname", mail:"user1@mail.mail", birthDate:new Date("2/1/1980"),password: "coucou")
     }
 
     def cleanup() {
@@ -29,8 +29,8 @@ class User_backupIntegrationSpec extends Specification {
         userWithSameNick.save(flush: true)
 
         then: "the first user was saved but the second user was not saved"
-        User_backup.findByFirstName("user1") != null
-        User_backup.findById(2) == null
+        Member.findByFirstName("user1") != null
+        Member.findById(2) == null
 
     }
 
@@ -44,7 +44,7 @@ class User_backupIntegrationSpec extends Specification {
         userWithSameMail.save(flush: true)
 
         then: "the first user was saved but the second user was not saved"
-        User_backup.findByNickname("mynick") != null
-        User_backup.findByNickname("userWithSameMailThanUser1") == null
+        Member.findByUsername("mynick") != null
+        Member.findByUsername("userWithSameMailThanUser1") == null
     }
 }

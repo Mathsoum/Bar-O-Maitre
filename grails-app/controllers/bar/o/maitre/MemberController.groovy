@@ -23,7 +23,6 @@ class MemberController {
         respond new Member(params)
     }
 
-    @Transactional
     def save(Member memberInstance) {
         if (memberInstance == null) {
             notFound()
@@ -40,7 +39,7 @@ class MemberController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'member.label', default: 'Member'), memberInstance.id])
-                redirect memberInstance
+                redirect action:'show', id: memberInstance.id //memberInstance
             }
             '*' { respond memberInstance, [status: CREATED] }
         }
