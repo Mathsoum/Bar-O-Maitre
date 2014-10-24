@@ -23,7 +23,7 @@ class Member {
     static hasMany = [friends: Member]
 
 	static transients = ['springSecurityService']
-
+    static hasMany = [bars : Bar]
 	static constraints = {
 		username blank: false, unique: true
 		password blank: false
