@@ -9,6 +9,7 @@ import spock.lang.Unroll
  */
 @TestFor(Bar)
 class BarSpec extends Specification {
+<<<<<<< HEAD
     Bar barTest
 
     def setup() {
@@ -55,7 +56,5 @@ class BarSpec extends Specification {
         "test" | "On decrit" | "address" | "Bar a vin" | "" | new Member(username: 'admin', password: 'admin', firstName: 'toto', lastName:'tata', mail:'toto@gmail.com', birthDate: new Date("1985/10/10")) | null
         "test" | "On decrit" | "address" | "Bar a vin" | null | new Member(username: 'admin', password: 'admin', firstName: 'toto', lastName:'tata', mail:'toto@gmail.com', birthDate: new Date("1985/10/10")) | null
         "test" | "On decrit" | "address" | "Bar a vin" | "  " | new Member(username: 'admin', password: 'admin', firstName: 'toto', lastName:'tata', mail:'toto@gmail.com', birthDate: new Date("1985/10/10")) | null
-
-
     }
 }
