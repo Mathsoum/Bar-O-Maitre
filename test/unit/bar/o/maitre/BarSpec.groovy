@@ -9,7 +9,6 @@ import spock.lang.Unroll
  */
 @TestFor(Bar)
 class BarSpec extends Specification {
-<<<<<<< HEAD
     Bar barTest
 
     def setup() {
@@ -38,7 +37,6 @@ class BarSpec extends Specification {
     @Unroll
     void "test Create of bar with incorrect attributes "() {
         given:"An incorrect bar"
-
         barTest.barName = name
         barTest.description = desc
         barTest.type = typ
