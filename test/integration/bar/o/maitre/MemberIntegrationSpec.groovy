@@ -1,7 +1,9 @@
 package bar.o.maitre
 
+import grails.plugin.springsecurity.SpringSecurityService
 import grails.test.mixin.TestFor
 import grails.validation.ValidationException
+import org.springframework.security.crypto.password.PasswordEncoder
 import spock.lang.Specification
 
 
@@ -10,15 +12,6 @@ import spock.lang.Specification
  */
 @TestFor(Member)
 class MemberIntegrationSpec extends Specification {
-    Rank userRole
-
-    def setup() {
-        userRole = new Rank(authority: 'ROLE_USER')
-        userRole.save(flush: true)
-    }
-
-    def cleanup() {
-    }
 
     def "test add two users with the same nick"() {
         given: "two users with the same nick"
@@ -79,5 +72,39 @@ class MemberIntegrationSpec extends Specification {
 
         then: "saving the second user throw a ValidationException"
             thrown ValidationException
+    }
+
+    def "test that update a user password scrambles it before saving it"() {
+        given: "a user with a password"
+        Member member = new Member(
+            username: "member",
+            password: "password",
+            firstName: "John",
+            lastName: "Smith",
+            mail: "john.smith@domain.com",
+            birthDate: new Date("1/1/1980")
+        )
+        member.save(flush: true)
+
+        and: "the spring security service"
+        member.springSecurityService = Mock(SpringSecurityService)
+        member.springSecurityService.passwordEncoder >> Mock(PasswordEncoder)
+
+        and: "a new password"
+        String newPassword = "newPassword"
+
+        when: "updating his password"
+        member.password = newPassword
+        member.save(flush: true)
+
+        then: "password has been scrambled"
+        1 * member.springSecurityService.encodePassword(newPassword)
+
+        when: "updating member without changing the password"
+        member.firstName = "Jane"
+        member.save(flush: true)
+
+        then: "no need to scrambled anything"
+        0 * member.springSecurityService.encodePassword(newPassword)
     }
 }
