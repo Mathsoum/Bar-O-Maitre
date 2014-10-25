@@ -67,19 +67,9 @@ class Member {
         return true
     }
 
-    int hashCode() {
-        int result
-        result = username.hashCode()
-        result = 31 * result + mail.hashCode()
-        return result
-    }
-
 
     @Override
     public String toString() {
-        return "Member{" +
-            "username='" + username + '\'' +
-            ", mail='" + mail + '\'' +
-            '}';
+        return "$username ($mail)"
     }
 }

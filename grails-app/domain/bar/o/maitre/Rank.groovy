@@ -23,10 +23,6 @@ class Rank {
         return true
     }
 
-    int hashCode() {
-        return authority.hashCode()
-    }
-
     @Override
     public String toString() {
         return "Rank{" +
