@@ -54,4 +54,32 @@ class Member {
 	protected void encodePassword() {
 		password = springSecurityService?.passwordEncoder ? springSecurityService.encodePassword(password) : password
 	}
+
+    boolean equals(o) {
+        if (this.is(o)) return true
+        if (getClass() != o.class) return false
+
+        Member member = (Member) o
+
+        if (mail != member.mail) return false
+        if (username != member.username) return false
+
+        return true
+    }
+
+    int hashCode() {
+        int result
+        result = username.hashCode()
+        result = 31 * result + mail.hashCode()
+        return result
+    }
+
+
+    @Override
+    public String toString() {
+        return "Member{" +
+            "username='" + username + '\'' +
+            ", mail='" + mail + '\'' +
+            '}';
+    }
 }

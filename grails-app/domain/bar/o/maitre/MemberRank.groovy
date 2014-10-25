@@ -95,4 +95,12 @@ class MemberRank implements Serializable {
 		id composite: ['rank', 'member']
 		version false
 	}
+
+    @Override
+    public String toString() {
+        return "MemberRank{" +
+            "member=" + member +
+            ", rank=" + rank +
+            '}';
+    }
 }
