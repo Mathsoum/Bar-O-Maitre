@@ -98,9 +98,6 @@ class MemberRank implements Serializable {
 
     @Override
     public String toString() {
-        return "MemberRank{" +
-            "member=" + member +
-            ", rank=" + rank +
-            '}';
+        return "$member / $rank"
     }
 }

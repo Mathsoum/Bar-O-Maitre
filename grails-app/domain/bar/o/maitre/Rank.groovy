@@ -25,8 +25,6 @@ class Rank {
 
     @Override
     public String toString() {
-        return "Rank{" +
-            "authority='" + authority + '\'' +
-            '}';
+        return "$authority"
     }
 }
