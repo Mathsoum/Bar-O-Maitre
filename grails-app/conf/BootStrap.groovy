@@ -1,8 +1,11 @@
 import bar.o.maitre.Member
 import bar.o.maitre.MemberRank
+import bar.o.maitre.MemberRankService
 import bar.o.maitre.Rank
 
 class BootStrap {
+
+    MemberRankService memberRankService
 
     def init = { servletContext ->
 
@@ -15,8 +18,8 @@ class BootStrap {
         def testUser = new Member(username: 'user', password: 'user', firstName: 'titi', lastName:'tutu', mail:'titi@gmail.com',birthDate: new Date("1988/10/10"))
         testUser.save(flush: true, failOnError: true)
 
-        MemberRank.create testAdmin, adminRole, true
-        MemberRank.create testUser, userRole, true
+        memberRankService.create testAdmin, adminRole, true
+        memberRankService.create testUser, userRole, true
     }
 
     def destroy = {
