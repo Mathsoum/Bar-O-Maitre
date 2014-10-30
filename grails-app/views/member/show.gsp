@@ -106,7 +106,7 @@
 
         <g:if test="${memberInstance?.friends}">
           <li class="fieldcontain">
-            <span id="passwordExpired-label" class="property-label">Friends</span>
+            <span id="add-friends" class="property-label">Friends</span>
 
             <span class="property-value" aria-labelledby="passwordExpired-label">
             <ul style="list-style-type: none">
