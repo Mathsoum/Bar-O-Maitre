@@ -1,4 +1,4 @@
-<%@ page import="bar.o.maitre.Bar" %>
+<%@ page import="bar.o.maitre.Member; bar.o.maitre.Bar" %>
 
 
 
@@ -46,4 +46,5 @@
 	<g:textField name="price" required="" value="${barInstance?.price}"/>
 
 </div>
+
 

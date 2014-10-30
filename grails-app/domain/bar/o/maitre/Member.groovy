@@ -20,7 +20,7 @@ class Member {
 	boolean passwordExpired
 
 	static transients = ['springSecurityService']
-
+    static hasMany = [bars : Bar]
 	static constraints = {
 		username blank: false, unique: true
 		password blank: false
@@ -54,4 +54,5 @@ class Member {
 	protected void encodePassword() {
 		password = springSecurityService?.passwordEncoder ? springSecurityService.encodePassword(password) : password
 	}
+
 }

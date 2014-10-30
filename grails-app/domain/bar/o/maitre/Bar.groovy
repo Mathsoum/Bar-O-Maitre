@@ -11,7 +11,7 @@ class Bar {
     /*
     TODO: Faire le lien avec le domaine membre ( constraint, test, controller ...)
      */
-    //Membre admin
+    Member admin
 
     static constraints = {
         barName blank: false, nullable : false
@@ -19,5 +19,6 @@ class Bar {
         address blank: false, nullable : false
         type blank: false, nullable : false
         price blank: false, nullable : false
+        admin blank: false, nullable : false
     }
 }

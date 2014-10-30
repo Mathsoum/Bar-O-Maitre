@@ -12,7 +12,7 @@
 		<div class="nav" role="navigation">
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
+				<li><g:link class="create" action="create">Créer ton bar</g:link></li>
 			</ul>
 		</div>
 		<div id="list-bar" class="content scaffold-list" role="main">
@@ -33,7 +33,9 @@
 						<g:sortableColumn property="type" title="${message(code: 'bar.type.label', default: 'Type')}" />
 					
 						<g:sortableColumn property="price" title="${message(code: 'bar.price.label', default: 'Price')}" />
-					
+
+                        <g:sortableColumn property="admin" title="${message(code: 'bar.admin.label', default: 'Admin')}" />
+
 					</tr>
 				</thead>
 				<tbody>
@@ -49,6 +51,8 @@
 						<td>${fieldValue(bean: barInstance, field: "type")}</td>
 					
 						<td>${fieldValue(bean: barInstance, field: "price")}</td>
+
+                        <td>${fieldValue(bean: barInstance, field: "admin")}</td>
 					
 					</tr>
 				</g:each>
