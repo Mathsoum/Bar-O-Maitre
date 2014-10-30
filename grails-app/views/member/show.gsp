@@ -112,7 +112,9 @@
             <ul style="list-style-type: none">
             <g:each in="${memberInstance?.friends}">
               <li>
-                <p><g:link action="show" resource="${it}">${ it.username }</g:link></p>
+                <p><g:link action="show" resource="${it}">${ it.username }</g:link>
+                   <g:link action="delete_friend" resource="${it}">Delete that friend</g:link>
+                </p>
               </li>
             </g:each>
             </ul>

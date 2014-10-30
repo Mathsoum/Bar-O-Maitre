@@ -114,4 +114,12 @@ class MemberController {
         flash.message = "Friend successfully added ! =)"
         redirect action: "index", method: "GET"
     }
+
+    def delete_friend(Member memberInstance) {
+        Member currentUser = ((Member) springSecurityService.currentUser)
+        currentUser.removeFromFriends(memberInstance)
+        currentUser.save(flush: true)
+
+        redirect action: "show", method: "GET", params: [id: currentUser.id]
+    }
 }
