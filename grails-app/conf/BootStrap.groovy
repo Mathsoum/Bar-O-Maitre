@@ -1,3 +1,6 @@
+import bar.o.maitre.Member
+import bar.o.maitre.MemberRank
+import bar.o.maitre.Rank
 
 class BootStrap {
 
