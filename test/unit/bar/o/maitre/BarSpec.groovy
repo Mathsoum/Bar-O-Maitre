@@ -25,6 +25,7 @@ class BarSpec extends Specification {
         barTest.type = "Bar tapas"
         barTest.price = "very expensive"
         barTest.address = "3rd street tuna"
+        barTest.admin = new Member(username: 'admin', password: 'admin', firstName: 'toto', lastName:'tata', mail:'toto@gmail.com', birthDate: new Date("1985/10/10"))
 
         when:"The bar is save on database"
         def res = barTest.save()
@@ -42,7 +43,7 @@ class BarSpec extends Specification {
         barTest.type = typ
         barTest.price = pric
         barTest.address = addr
-
+        barTest.admin = adm
         when:"The bar is save on database"
         def res = barTest.save()
 
@@ -50,10 +51,10 @@ class BarSpec extends Specification {
         res == resultat
 
         where:
-        name | desc | addr | typ | pric | resultat
-        "test" | "On decrit" | "address" | "Bar a vin" | "" | null
-        "test" | "On decrit" | "address" | "Bar a vin" | null | null
-        "test" | "On decrit" | "address" | "Bar a vin" | "  " | null
+        name | desc | addr | typ | pric | adm | resultat
+        "test" | "On decrit" | "address" | "Bar a vin" | "" | new Member(username: 'admin', password: 'admin', firstName: 'toto', lastName:'tata', mail:'toto@gmail.com', birthDate: new Date("1985/10/10")) | null
+        "test" | "On decrit" | "address" | "Bar a vin" | null | new Member(username: 'admin', password: 'admin', firstName: 'toto', lastName:'tata', mail:'toto@gmail.com', birthDate: new Date("1985/10/10")) | null
+        "test" | "On decrit" | "address" | "Bar a vin" | "  " | new Member(username: 'admin', password: 'admin', firstName: 'toto', lastName:'tata', mail:'toto@gmail.com', birthDate: new Date("1985/10/10")) | null
 
 
     }
