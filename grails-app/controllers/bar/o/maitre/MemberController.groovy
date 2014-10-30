@@ -5,10 +5,13 @@ import static org.springframework.http.HttpStatus.NOT_FOUND
 import static org.springframework.http.HttpStatus.OK
 import static org.springframework.http.HttpStatus.NO_CONTENT
 
+import grails.plugin.springsecurity.SpringSecurityService
 import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
 class MemberController {
+
+    SpringSecurityService springSecurityService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
@@ -101,5 +104,14 @@ class MemberController {
             }
             '*'{ render status: NOT_FOUND }
         }
+    }
+
+    def add_as_friend(Member memberInstance) {
+        Member currentUser = ((Member) springSecurityService.currentUser)
+        currentUser.addToFriends(memberInstance)
+        currentUser.save(flush: true)
+
+        flash.message = "Friend successfully added ! =)"
+        redirect action: "index", method: "GET"
     }
 }

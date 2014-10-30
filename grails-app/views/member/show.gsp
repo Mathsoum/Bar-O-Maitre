@@ -32,15 +32,6 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${memberInstance?.password}">
-				<li class="fieldcontain">
-					<span id="password-label" class="property-label"><g:message code="member.password.label" default="Password" /></span>
-					
-						<span class="property-value" aria-labelledby="password-label"><g:fieldValue bean="${memberInstance}" field="password"/></span>
-					
-				</li>
-				</g:if>
-			
 				<g:if test="${memberInstance?.firstName}">
 				<li class="fieldcontain">
 					<span id="firstName-label" class="property-label"><g:message code="member.firstName.label" default="First Name" /></span>
@@ -103,21 +94,38 @@
 					
 				</li>
 				</g:if>
-			
-				<g:if test="${memberInstance?.passwordExpired}">
-				<li class="fieldcontain">
-					<span id="passwordExpired-label" class="property-label"><g:message code="member.passwordExpired.label" default="Password Expired" /></span>
-					
-						<span class="property-value" aria-labelledby="passwordExpired-label"><g:formatBoolean boolean="${memberInstance?.passwordExpired}" /></span>
-					
-				</li>
-				</g:if>
+
+        <g:if test="${memberInstance?.passwordExpired}">
+          <li class="fieldcontain">
+            <span id="passwordExpired-label" class="property-label"><g:message code="member.passwordExpired.label" default="Password Expired" /></span>
+
+            <span class="property-value" aria-labelledby="passwordExpired-label"><g:formatBoolean boolean="${memberInstance?.passwordExpired}" /></span>
+
+          </li>
+        </g:if>
+
+        <g:if test="${memberInstance?.friends}">
+          <li class="fieldcontain">
+            <span id="add-friends" class="property-label">Friends</span>
+
+            <span class="property-value" aria-labelledby="passwordExpired-label">
+            <ul style="list-style-type: none">
+            <g:each in="${memberInstance?.friends}">
+              <li>
+                <p><g:link action="show" resource="${it}">${ it.username }</g:link></p>
+              </li>
+            </g:each>
+            </ul>
+            </span>
+          </li>
+        </g:if>
 			
 			</ol>
 			<g:form url="[resource:memberInstance, action:'delete']" method="DELETE">
 				<fieldset class="buttons">
 					<g:link class="edit" action="edit" resource="${memberInstance}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
-					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+          <g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+          <g:link class="add_friend" action="add_as_friend" resource="${memberInstance}">Add to my friend list</g:link>
 				</fieldset>
 			</g:form>
 		</div>
