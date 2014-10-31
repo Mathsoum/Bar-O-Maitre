@@ -20,7 +20,7 @@ class MemberRankService {
     }
 
     MemberRank create(Member member, Rank rank, boolean flush = false) {
-        def instance = new MemberRank(member: member, rank: rank)
+        MemberRank instance = new MemberRank(member: member, rank: rank)
         instance.save(flush: flush, insert: true)
         instance
     }

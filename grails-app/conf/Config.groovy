@@ -125,15 +125,16 @@ grails.plugin.springsecurity.userLookup.userDomainClassName = 'bar.o.maitre.Memb
 grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'bar.o.maitre.MemberRank'
 grails.plugin.springsecurity.authority.className = 'bar.o.maitre.Rank'
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
-	'/':                              ['permitAll'],
-	'/index':                         ['permitAll'],
+    '/':                              ['permitAll'],
+    '/index':                         ['permitAll'],
     '/member/** ':                    ['permitAll'],
     '/bar/** ':                       ['permitAll'],
-	'/index.gsp':                     ['permitAll'],
-	'/assets/**':                     ['permitAll'],
-	'/**/js/**':                      ['permitAll'],
-	'/**/css/**':                     ['permitAll'],
-	'/**/images/**':                  ['permitAll'],
-	'/**/favicon.ico':                ['permitAll']
+    '/index.gsp':                     ['permitAll'],
+    '/assets/**':                     ['permitAll'],
+    '/**/js/**':                      ['permitAll'],
+    '/**/css/**':                     ['permitAll'],
+    '/**/images/**':                  ['permitAll'],
+    '/**/favicon.ico':                ['permitAll'],
+    '/dbconsole/**':                  ['permitAll']
 ]
 

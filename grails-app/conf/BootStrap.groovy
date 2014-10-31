@@ -18,8 +18,8 @@ class BootStrap {
         def testUser = new Member(username: 'user', password: 'user', firstName: 'titi', lastName:'tutu', mail:'titi@gmail.com',birthDate: new Date("1988/10/10"))
         testUser.save(flush: true, failOnError: true)
 
-        memberRankService.create testAdmin, adminRole, true
-        memberRankService.create testUser, userRole, true
+        memberRankService.create(testAdmin, adminRole, true)
+        memberRankService.create(testUser, userRole, true)
     }
 
     def destroy = {

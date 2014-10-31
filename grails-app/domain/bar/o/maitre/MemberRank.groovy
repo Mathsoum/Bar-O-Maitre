@@ -31,9 +31,8 @@ class MemberRank implements Serializable {
 //			rank == Rank.load(rankId)
 //		}.count() > 0
 //	}
-//
+
 	static constraints = {
-        rank unique: 'member'
 //		rank validator: { Rank r, MemberRank ur ->
 //			if (ur.member == null) return
 //			boolean existing = false
