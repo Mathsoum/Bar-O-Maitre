@@ -21,4 +21,10 @@ class Bar {
         price blank: false, nullable : false
         admin blank: false, nullable : false
     }
+
+
+    @Override
+    public String toString() {
+        return barName;
+    }
 }
