@@ -1,5 +1,5 @@
 
-<%@ page import="bar.o.maitre.Member" %>
+<%@ page import="bar.o.maitre.Member; bar.o.maitre.Member" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -26,8 +26,6 @@
 					
 						<g:sortableColumn property="username" title="${message(code: 'member.username.label', default: 'Username')}" />
 					
-						<g:sortableColumn property="password" title="${message(code: 'member.password.label', default: 'Password')}" />
-					
 						<g:sortableColumn property="firstName" title="${message(code: 'member.firstName.label', default: 'First Name')}" />
 					
 						<g:sortableColumn property="lastName" title="${message(code: 'member.lastName.label', default: 'Last Name')}" />
@@ -35,7 +33,9 @@
 						<g:sortableColumn property="mail" title="${message(code: 'member.mail.label', default: 'Mail')}" />
 					
 						<g:sortableColumn property="birthDate" title="${message(code: 'member.birthDate.label', default: 'Birth Date')}" />
-					
+
+                        <g:sortableColumn property="bars" title="${message(code: 'member.bars.label', default: 'Bars')}" />
+
 					</tr>
 				</thead>
 				<tbody>
@@ -44,15 +44,15 @@
 					
 						<td><g:link action="show" id="${memberInstance.id}">${fieldValue(bean: memberInstance, field: "username")}</g:link></td>
 					
-						<td>${fieldValue(bean: memberInstance, field: "password")}</td>
-					
 						<td>${fieldValue(bean: memberInstance, field: "firstName")}</td>
 					
 						<td>${fieldValue(bean: memberInstance, field: "lastName")}</td>
-					
+
 						<td>${fieldValue(bean: memberInstance, field: "mail")}</td>
 					
 						<td><g:formatDate date="${memberInstance.birthDate}" /></td>
+
+                        <td> <g:select name="bars" from="${bar.o.maitre.Bar.findAllByAdmin(memberInstance).each { it.toString()}}"></g:select></td>
 					
 					</tr>
 				</g:each>
