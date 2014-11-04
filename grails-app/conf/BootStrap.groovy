@@ -1,3 +1,4 @@
+import bar.o.maitre.Bar
 import bar.o.maitre.Member
 import bar.o.maitre.MemberRank
 import bar.o.maitre.Rank
@@ -17,6 +18,9 @@ class BootStrap {
 
         MemberRank.create testAdmin, adminRole, true
         MemberRank.create testUser, userRole, true
+
+        def testBar = new Bar(barName: "Babar", description: "Bilbo", type: "vador", address: "Loin", price: "cher", admin: testAdmin)
+        testBar.save(flush: true, failOnError: true)
     }
 
     def destroy = {

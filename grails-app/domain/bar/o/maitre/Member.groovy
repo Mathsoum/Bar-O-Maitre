@@ -55,4 +55,8 @@ class Member {
 		password = springSecurityService?.passwordEncoder ? springSecurityService.encodePassword(password) : password
 	}
 
+    @Override
+    public String toString() {
+        return username;
+    }
 }
