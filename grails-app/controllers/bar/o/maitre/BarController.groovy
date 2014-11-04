@@ -54,7 +54,14 @@ class BarController {
     }
 
     def edit(Bar barInstance) {
-        respond barInstance
+        if (barInstance.admin == springSecurityService.currentUser)
+        {
+            respond barInstance
+        } else
+        {
+            System.out.println("Impossible d'update")
+            redirect barInstance
+        }
     }
 
     @Transactional
@@ -82,20 +89,25 @@ class BarController {
 
     @Transactional
     def delete(Bar barInstance) {
-
-        if (barInstance == null) {
-            notFound()
-            return
-        }
-
-        barInstance.delete flush: true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'Bar.label', default: 'Bar'), barInstance.id])
-                redirect action: "index", method: "GET"
+        if (barInstance.admin != springSecurityService.currentUser)
+        {
+            System.out.println("Impossible de delete")
+            redirect barInstance
+        } else {
+            if (barInstance == null) {
+                notFound()
+                return
             }
-            '*' { render status: NO_CONTENT }
+
+            barInstance.delete flush: true
+
+            request.withFormat {
+                form multipartForm {
+                    flash.message = message(code: 'default.deleted.message', args: [message(code: 'Bar.label', default: 'Bar'), barInstance.id])
+                    redirect action: "index", method: "GET"
+                }
+                '*' { render status: NO_CONTENT }
+            }
         }
     }
 

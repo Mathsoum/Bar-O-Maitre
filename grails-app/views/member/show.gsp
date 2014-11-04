@@ -67,7 +67,7 @@
 					
 				</li>
 				</g:if>
-			
+
 				<g:if test="${memberInstance?.accountExpired}">
 				<li class="fieldcontain">
 					<span id="accountExpired-label" class="property-label"><g:message code="member.accountExpired.label" default="Account Expired" /></span>

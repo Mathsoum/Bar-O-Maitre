@@ -67,14 +67,25 @@
 					
 				</li>
 				</g:if>
+
+                <g:if test="${barInstance?.admin}">
+                    <li class="fieldcontain">
+                        <span id="admin-label" class="property-label"><g:message code="bar.admin.label" default="Admin" /></span>
+
+                        <span class="property-value" aria-labelledby="admin-label"><g:fieldValue bean="${barInstance}" field="admin"/></span>
+
+                    </li>
+                </g:if>
 			
 			</ol>
+            <g:if test="${barInstance.admin == springSecurityService.currentUser}">
 			<g:form url="[resource:barInstance, action:'delete']" method="DELETE">
 				<fieldset class="buttons">
 					<g:link class="edit" action="edit" resource="${barInstance}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
 					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
 				</fieldset>
 			</g:form>
+            </g:if>
 		</div>
 	</body>
 </html>
