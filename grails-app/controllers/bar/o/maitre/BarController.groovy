@@ -19,7 +19,11 @@ class BarController {
     }
 
     def show(Bar barInstance) {
-        respond barInstance
+        boolean userCanModify = barInstance.admin == springSecurityService.currentUser
+        //TODO A user can modify a bar regarding his rank !!
+
+        render(view: "show", model: [barInstance: barInstance,
+                                     userCanModify: userCanModify])
     }
 
     @Secured("ROLE_ADMIN")
@@ -54,14 +58,7 @@ class BarController {
     }
 
     def edit(Bar barInstance) {
-        if (barInstance.admin == springSecurityService.currentUser)
-        {
-            respond barInstance
-        } else
-        {
-            System.out.println("Impossible d'update")
-            redirect barInstance
-        }
+        respond barInstance
     }
 
     @Transactional

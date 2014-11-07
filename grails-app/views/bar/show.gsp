@@ -78,7 +78,7 @@
                 </g:if>
 			
 			</ol>
-            <g:if test="${barInstance.admin == springSecurityService.currentUser}">
+            <g:if test="${userCanModify}">
 			<g:form url="[resource:barInstance, action:'delete']" method="DELETE">
 				<fieldset class="buttons">
 					<g:link class="edit" action="edit" resource="${barInstance}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
