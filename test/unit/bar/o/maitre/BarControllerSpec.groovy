@@ -157,13 +157,11 @@ class BarControllerSpec extends Specification {
 
         then:"It exists"
         Bar.count() == 1
-        println Bar.list()
 
         when:"The domain instance is passed to the delete action"
         controller.delete(bar)
 
         then:"The instance is deleted"
-        println Bar.list()
         Bar.count() == 0
         response.redirectedUrl == '/bar/show/1'
         flash.message != null

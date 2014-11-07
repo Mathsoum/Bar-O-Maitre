@@ -6,10 +6,8 @@ class Bar {
     String address
     String type
     String price
-
-    /*
-    TODO: Faire le lien avec le domaine membre ( constraint, test, controller ...)
-     */
+    static hasMany = [likers : Member]
+    
     Member admin
 
     static constraints = {
@@ -21,9 +19,12 @@ class Bar {
         admin blank: false, nullable : false
     }
 
-
     @Override
     public String toString() {
         return barName;
+    }
+
+    String getNbLike(){
+       likers.size()
     }
 }

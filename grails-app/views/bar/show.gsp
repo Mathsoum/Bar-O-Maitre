@@ -67,7 +67,6 @@
 					
 				</li>
 				</g:if>
-
                 <g:if test="${barInstance?.admin}">
                     <li class="fieldcontain">
                         <span id="admin-label" class="property-label"><g:message code="bar.admin.label" default="Admin" /></span>
@@ -76,16 +75,22 @@
 
                     </li>
                 </g:if>
-			
+                <li class="fieldcontain">
+                    <span id="like-label" class="property-label"><g:message code="bar.like.label" default="Like" /></span>
+
+                    <span class="property-value" aria-labelledby="like-label">${barInstance?.getNbLike()}</span>
+
+                </li>
 			</ol>
-            <g:if test="${userCanModify}">
-			<g:form url="[resource:barInstance, action:'delete']" method="DELETE">
-				<fieldset class="buttons">
-					<g:link class="edit" action="edit" resource="${barInstance}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
-					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
-				</fieldset>
-			</g:form>
-            </g:if>
+          <g:if test="${userCanModify}">
+              <g:form url="[resource:barInstance, action:'delete']" method="DELETE">
+                  <fieldset class="buttons">
+                      <g:link class="edit" action="edit" resource="${barInstance}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
+                      <g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+                      <g:link class="like" action="like" resource="${barInstance}">Like</g:link>
+                  </fieldset>
+              </g:form>
+          </g:if>
 		</div>
 	</body>
 </html>
