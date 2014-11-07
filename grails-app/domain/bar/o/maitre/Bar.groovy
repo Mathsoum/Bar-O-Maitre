@@ -1,7 +1,6 @@
 package bar.o.maitre
 
 class Bar {
-
     String barName
     String description
     String address

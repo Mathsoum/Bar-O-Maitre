@@ -1,7 +1,9 @@
 package bar.o.maitre
 
+import groovy.transform.EqualsAndHashCode
 import org.apache.commons.lang.builder.HashCodeBuilder
 
+@EqualsAndHashCode
 class MemberRank implements Serializable {
 
 	private static final long serialVersionUID = 1
@@ -9,7 +11,7 @@ class MemberRank implements Serializable {
 	Member member
 	Rank rank
 
-	boolean equals(other) {
+/*	boolean equals(other) {
 		if (!(other instanceof MemberRank)) {
 			return false
 		}
@@ -23,7 +25,7 @@ class MemberRank implements Serializable {
 		if (member) builder.append(member.id)
 		if (rank) builder.append(rank.id)
 		builder.toHashCode()
-	}
+	}*/
 //
 //	static boolean exists(long memberId, long rankId) {
 //		MemberRank.where {

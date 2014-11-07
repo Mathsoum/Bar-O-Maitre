@@ -34,7 +34,8 @@ class BarController {
             return
         }
 
-        barInstance.setAdmin(springSecurityService.currentUser)
+        barInstance.admin = springSecurityService.currentUser
+
         barInstance.validate()
 
         if (barInstance.hasErrors()) {

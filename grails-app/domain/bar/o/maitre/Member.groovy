@@ -1,7 +1,9 @@
 package bar.o.maitre
 
 import groovy.time.TimeCategory
+import groovy.transform.EqualsAndHashCode
 
+@EqualsAndHashCode
 class Member {
 
 	transient springSecurityService
@@ -56,19 +58,6 @@ class Member {
 	protected void encodePassword() {
 		password = springSecurityService?.passwordEncoder ? springSecurityService.encodePassword(password) : password
 	}
-
-    boolean equals(o) {
-        if (this.is(o)) return true
-        if (getClass() != o.class) return false
-
-        Member member = (Member) o
-
-        if (mail != member.mail) return false
-        if (username != member.username) return false
-
-        return true
-    }
-
 
     @Override
     public String toString() {
