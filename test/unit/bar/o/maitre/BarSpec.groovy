@@ -15,9 +15,6 @@ class BarSpec extends Specification {
         barTest = new Bar()
     }
 
-    def cleanup() {
-    }
-
     void "test creation of bar with correct attributes "() {
         given:"A correct bar"
         barTest.barName = "Acuda"

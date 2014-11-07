@@ -1,5 +1,7 @@
 package bar.o.maitre
+import groovy.transform.EqualsAndHashCode
 
+@EqualsAndHashCode
 class Rank {
 
 	String authority
@@ -11,17 +13,6 @@ class Rank {
 	static constraints = {
 		authority blank: false, unique: true
 	}
-
-    boolean equals(o) {
-        if (this.is(o)) return true
-        if (getClass() != o.class) return false
-
-        Rank rank = (Rank) o
-
-        if (authority != rank.authority) return false
-
-        return true
-    }
 
     @Override
     public String toString() {

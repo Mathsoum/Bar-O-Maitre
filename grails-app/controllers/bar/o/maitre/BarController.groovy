@@ -1,9 +1,11 @@
 package bar.o.maitre
 
+import static org.springframework.http.HttpStatus.CREATED
+import static org.springframework.http.HttpStatus.OK
+import static org.springframework.http.HttpStatus.NOT_FOUND
+
 import grails.plugin.springsecurity.SpringSecurityService
 import grails.plugin.springsecurity.annotation.Secured
-
-import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
@@ -19,6 +21,11 @@ class BarController {
     }
 
     def show(Bar barInstance) {
+        if (barInstance == null) {
+            notFound()
+            return
+        }
+
         boolean userCanModify = barInstance.admin == springSecurityService.currentUser
         //TODO A user can modify a bar regarding his rank !!
 
@@ -38,7 +45,8 @@ class BarController {
             return
         }
 
-        barInstance.setAdmin(springSecurityService.currentUser)
+        barInstance.admin = springSecurityService.currentUser
+
         barInstance.validate()
 
         if (barInstance.hasErrors()) {
@@ -78,7 +86,7 @@ class BarController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'Bar.label', default: 'Bar'), barInstance.id])
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'bar.label', default: 'Bar'), barInstance.barName])
                 redirect barInstance
             }
             '*' { respond barInstance, [status: OK] }
@@ -87,24 +95,21 @@ class BarController {
 
     @Transactional
     def delete(Bar barInstance) {
-        if (barInstance.admin != springSecurityService.currentUser)
-        {
-            System.out.println("Impossible de delete")
-            redirect barInstance
-        } else {
-            if (barInstance == null) {
-                notFound()
-                return
-            }
+        if (barInstance == null) {
+            notFound()
+            return
+        }
+
+        if (barInstance.admin == springSecurityService.currentUser) {
 
             barInstance.delete flush: true
 
             request.withFormat {
                 form multipartForm {
-                    flash.message = message(code: 'default.deleted.message', args: [message(code: 'Bar.label', default: 'Bar'), barInstance.id])
-                    redirect action: "index", method: "GET"
+                    flash.message = message(code: 'default.updated.message', args: [message(code: 'bar.label', default: 'Bar'), barInstance.id])
+                    redirect barInstance
                 }
-                '*' { render status: NO_CONTENT }
+                '*' { respond barInstance, [status: OK] }
             }
         }
     }
