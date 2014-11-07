@@ -58,6 +58,7 @@ class BarController {
     }
 
     def edit(Bar barInstance) {
+        // TODO Secured by ACL bro !
         respond barInstance
     }
 
