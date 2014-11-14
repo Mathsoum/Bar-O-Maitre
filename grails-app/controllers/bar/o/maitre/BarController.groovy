@@ -108,7 +108,7 @@ class BarController {
         } else {
             flash.message = "Vous avez déjà liké ce bar"
         }
-        
+
         redirect action: "show", id: barInstance.id, method: "GET"
     }
 
