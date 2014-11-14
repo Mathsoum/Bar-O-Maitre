@@ -22,7 +22,7 @@ class Member {
 	boolean passwordExpired
 
     //Friendship relation
-    static hasMany = [friends: Member, bars : Bar]
+    static hasMany = [friends: Member]
 
 	static transients = ['springSecurityService']
 	static constraints = {

@@ -1,5 +1,6 @@
 
 <%@ page import="bar.o.maitre.Bar" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 	<head>

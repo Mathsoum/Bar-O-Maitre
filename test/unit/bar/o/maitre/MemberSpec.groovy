@@ -10,6 +10,8 @@ import spock.lang.Specification
 @TestFor(Member)
 class MemberSpec extends Specification {
 
+    MemberRankService memberRankService
+
     def "test that member must be at least 18 years old"() {
         given: "a member"
         Member member = new Member(
@@ -70,4 +72,20 @@ class MemberSpec extends Specification {
         new Member(username: "username", mail: "john.smith@domain.com")     | new Member(username: "nickname", mail: "john.smith@domain.com")   | false
         new Integer(42)                                                     | new Member(username: "nickname", mail: "john.smith@domain.com")   | false
     }
+
+    /*def "test getAuthorities"() {
+        given: "a member with username and mail and a rank"
+        Member member = new Member(
+                username: "nickname",
+                mail: "john.smith@domain.com"
+        )
+
+        memberRankService.create(member, adminRole, true)
+
+        when: "getting rank"
+        Set<Rank> rank = member.getAuthorities()
+
+        then: "the number of rank returned is correct"
+        rank.size() == 1
+    }*/
 }

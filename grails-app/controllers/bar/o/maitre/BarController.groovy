@@ -100,6 +100,17 @@ class BarController {
         }
     }
 
+    def like(Bar barInstance) {
+        Member currentUser = ((Member) springSecurityService.currentUser)
+        if (!barInstance.likers.contains(currentUser)){
+            barInstance.addToLikers(currentUser)
+            flash.message = "+1 Like"
+        } else {
+            flash.message = "Vous avez déjà liké ce bar"
+        }
+        redirect action: "show", id: barInstance.id, method: "GET"
+    }
+
     protected void notFound() {
         request.withFormat {
             form multipartForm {
