@@ -7,6 +7,7 @@ import spock.lang.Specification
 @TestFor(MemberController)
 @Mock(Member)
 class MemberControllerSpec extends Specification {
+    MemberRankService memberRankService
 
     def populateValidParams(params) {
         assert params != null
@@ -20,6 +21,11 @@ class MemberControllerSpec extends Specification {
         params["accountExpired"] = false
         params["passwordExpired"] = false
         params["accountLocked"] = false
+    }
+
+    def setup() {
+        memberRankService = Mock(MemberRankService)
+        controller.memberRankService = memberRankService
     }
 
     void "Test the index action returns the correct model"() {
@@ -154,18 +160,6 @@ class MemberControllerSpec extends Specification {
 
         then:"The instance is deleted"
         Member.count() == 0
-        response.redirectedUrl == '/member/index'
-        flash.message != null
-    }
-
-    void "save a null memberInstance = fail"()
-    {
-
-        when:"the null bar is saved"
-        request.contentType = FORM_CONTENT_TYPE
-        controller.save(null)
-
-        then:"A 404 is returned"
         response.redirectedUrl == '/member/index'
         flash.message != null
     }

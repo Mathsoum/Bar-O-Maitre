@@ -11,7 +11,11 @@ class BootStrap {
     def init = { servletContext ->
 
         def adminRole = new Rank(authority: 'ROLE_ADMIN').save(flush: true)
+        new Rank(authority: 'ROLE_EXPERT').save(flush: true)
+        new Rank(authority: 'ROLE_CONFIRMED').save(flush: true)
+        new Rank(authority: 'ROLE_ADEPT').save(flush: true)
         def userRole = new Rank(authority: 'ROLE_USER').save(flush: true)
+
 
         def testAdmin = new Member(username: 'admin', password: 'admin', firstName: 'toto', lastName:'tata', mail:'toto@gmail.com', birthDate: new Date("1985/10/10"))
         testAdmin.save(flush: true, failOnError: true)

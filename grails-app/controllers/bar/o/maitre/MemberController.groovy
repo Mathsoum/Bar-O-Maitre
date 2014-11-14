@@ -12,6 +12,7 @@ import grails.transaction.Transactional
 class MemberController {
 
     SpringSecurityService springSecurityService
+    MemberRankService memberRankService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
@@ -41,10 +42,12 @@ class MemberController {
 
         memberInstance.save flush:true
 
+        memberRankService.attribute_user_role(memberInstance)
+
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'member.label', default: 'Member'), memberInstance.id])
-                redirect action:'show', id: memberInstance.id //memberInstance
+                redirect action:'show', id: memberInstance.id
             }
             '*' { respond memberInstance, [status: CREATED] }
         }
