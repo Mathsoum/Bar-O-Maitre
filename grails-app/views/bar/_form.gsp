@@ -1,9 +1,4 @@
 <%@ page import="bar.o.maitre.Member; bar.o.maitre.Bar" %>
-<<<<<<< HEAD
-=======
-
->>>>>>> #2 Link between member and bar during creation
-
 
 <div class="fieldcontain ${hasErrors(bean: barInstance, field: 'barName', 'error')} required">
 	<label for="barName">
