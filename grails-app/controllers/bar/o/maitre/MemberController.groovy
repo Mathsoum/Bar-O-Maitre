@@ -41,6 +41,8 @@ class MemberController {
 
         memberInstance.save flush:true
 
+        attribuerRoleUser(memberInstance)
+
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'member.label', default: 'Member'), memberInstance.id])
@@ -121,5 +123,13 @@ class MemberController {
         currentUser.save(flush: true)
 
         redirect action: "show", method: "GET", params: [id: currentUser.id]
+    }
+
+    def attribuerRoleUser (Member member){
+
+        if(MemberRank.findByMember(member) == null) {
+            MemberRank mr = new MemberRank(member:member, rank:Rank.findByAuthority("ROLE_USER"))
+            mr.save(flush:true)
+         }
     }
 }

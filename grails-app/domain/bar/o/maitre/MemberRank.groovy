@@ -10,22 +10,6 @@ class MemberRank implements Serializable {
 
 	Member member
 	Rank rank
-
-/*	boolean equals(other) {
-		if (!(other instanceof MemberRank)) {
-			return false
-		}
-
-		other.member?.id == member?.id &&
-		other.rank?.id == rank?.id
-	}
-
-	int hashCode() {
-		def builder = new HashCodeBuilder()
-		if (member) builder.append(member.id)
-		if (rank) builder.append(rank.id)
-		builder.toHashCode()
-	}*/
 //
 //	static boolean exists(long memberId, long rankId) {
 //		MemberRank.where {
