@@ -1,5 +1,5 @@
 
-<%@ page import="bar.o.maitre.Member" %>
+<%@ page import="bar.o.maitre.MemberRank; bar.o.maitre.Member" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -94,6 +94,13 @@
 					
 				</li>
 				</g:if>
+
+                    <li class="fieldcontain">
+                        <span id="rank-label" class="property-label"><g:message code="member.rank.label" default="Rank" /></span>
+
+                        <span class="property-value" aria-labelledby="rank-label">${bar.o.maitre.MemberRank.findByMember(memberInstance).getRank().getAuthority()}</span>
+
+                    </li>
 
         <g:if test="${memberInstance?.passwordExpired}">
           <li class="fieldcontain">
