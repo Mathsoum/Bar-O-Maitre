@@ -1,7 +1,13 @@
 package bar.o.maitre
 
 import grails.plugin.springsecurity.SpringSecurityService
+import grails.plugin.springsecurity.acl.AclClass
+import grails.plugin.springsecurity.acl.AclEntry
+import grails.plugin.springsecurity.acl.AclObjectIdentity
+import grails.plugin.springsecurity.acl.AclSid
 import grails.plugin.springsecurity.annotation.Secured
+import org.springframework.security.access.prepost.PreAuthorize
+import org.springframework.security.acls.domain.BasePermission
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
@@ -26,19 +32,22 @@ class BarController {
                                      userCanModify: userCanModify])
     }
 
-    @Secured("ROLE_ADMIN")
     def create() {
         respond new Bar(params)
     }
 
     @Transactional
     def save(Bar barInstance) {
+
+
         if (barInstance == null) {
             notFound()
             return
         }
 
-        barInstance.setAdmin(springSecurityService.currentUser)
+
+        Member currentUser = (Member) springSecurityService.currentUser
+        barInstance.setAdmin(currentUser)
         barInstance.validate()
 
         if (barInstance.hasErrors()) {
@@ -47,6 +56,7 @@ class BarController {
         }
 
         barInstance.save flush: true
+
 
         request.withFormat {
             form multipartForm {
@@ -57,6 +67,8 @@ class BarController {
         }
     }
 
+    //TODO Add role using hasAnyRole in place of hasRole
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasPermission(barInstance, 'admin')")
     def edit(Bar barInstance) {
         // TODO Secured by ACL bro !
         respond barInstance

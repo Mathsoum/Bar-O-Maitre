@@ -3,12 +3,19 @@ import bar.o.maitre.Member
 import bar.o.maitre.MemberRank
 import bar.o.maitre.MemberRankService
 import bar.o.maitre.Rank
+import grails.plugin.springsecurity.acl.AclClass
 
 class BootStrap {
 
     MemberRankService memberRankService
 
     def init = { servletContext ->
+
+        // ACL classes
+        AclClass barAcl = new AclClass(className: Bar.class.getName())
+        barAcl.save()
+        AclClass memberAcl = new AclClass(className: Member.class.getName())
+        memberAcl.save()
 
         def adminRole = new Rank(authority: 'ROLE_ADMIN').save(flush: true)
         def userRole = new Rank(authority: 'ROLE_USER').save(flush: true)
@@ -21,9 +28,6 @@ class BootStrap {
 
         memberRankService.create(testAdmin, adminRole, true)
         memberRankService.create(testUser, userRole, true)
-
-        def testBar = new Bar(barName: "Babar", description: "Bilbo", type: "vador", address: "Loin", price: "cher", admin: testAdmin)
-        testBar.save(flush: true, failOnError: true)
     }
 
     def destroy = {

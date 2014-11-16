@@ -1,5 +1,9 @@
 package bar.o.maitre
 
+import grails.plugin.springsecurity.acl.AclClass
+import grails.plugin.springsecurity.acl.AclObjectIdentity
+import grails.plugin.springsecurity.acl.AclSid
+
 import static org.springframework.http.HttpStatus.CREATED
 import static org.springframework.http.HttpStatus.NOT_FOUND
 import static org.springframework.http.HttpStatus.OK

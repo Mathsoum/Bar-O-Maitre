@@ -1,6 +1,12 @@
 package bar.o.maitre
 
+import grails.plugin.springsecurity.acl.AclClass
+import grails.plugin.springsecurity.acl.AclEntry
+import grails.plugin.springsecurity.acl.AclObjectIdentity
+import grails.plugin.springsecurity.acl.AclSid
 import groovy.time.TimeCategory
+import org.hibernate.Transaction
+import org.springframework.security.acls.domain.BasePermission
 
 class Member {
 
@@ -43,9 +49,34 @@ class Member {
 		MemberRank.findAllByMember(this).collect { it.rank }
 	}
 
-	def beforeInsert() {
-		encodePassword()
-	}
+    def beforeInsert() {
+        encodePassword()
+    }
+
+    def afterInsert() {
+        AclSid memberSid = new AclSid(principal: true, sid: username)
+        memberSid.save()
+
+        AclObjectIdentity aclObjectIdentity =
+            new AclObjectIdentity(
+                aclClass: AclClass.findByClassName(Member.class.getName()),
+                objectId: id,
+                owner: memberSid,
+                entriesInheriting: false
+            )
+        aclObjectIdentity.save(failOnError: true)
+
+        AclEntry aclEntry = new AclEntry(
+            aclObjectIdentity: aclObjectIdentity,
+            sid: memberSid,
+            aceOrder: 0,
+            mask: BasePermission.ADMINISTRATION.mask,
+            granting: false,
+            auditSuccess: false,
+            auditFailure: false
+        )
+        aclEntry.save(failOnError: true)
+    }
 
 	def beforeUpdate() {
 		if (isDirty('password')) {
