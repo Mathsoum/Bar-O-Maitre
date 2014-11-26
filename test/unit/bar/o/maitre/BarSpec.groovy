@@ -37,7 +37,6 @@ class BarSpec extends Specification {
     @Unroll
     void "test Create of bar with incorrect attributes "() {
         given:"An incorrect bar"
-
         barTest.barName = name
         barTest.description = desc
         barTest.type = typ
@@ -55,7 +54,5 @@ class BarSpec extends Specification {
         "test" | "On decrit" | "address" | "Bar a vin" | "" | new Member(username: 'admin', password: 'admin', firstName: 'toto', lastName:'tata', mail:'toto@gmail.com', birthDate: new Date("1985/10/10")) | null
         "test" | "On decrit" | "address" | "Bar a vin" | null | new Member(username: 'admin', password: 'admin', firstName: 'toto', lastName:'tata', mail:'toto@gmail.com', birthDate: new Date("1985/10/10")) | null
         "test" | "On decrit" | "address" | "Bar a vin" | "  " | new Member(username: 'admin', password: 'admin', firstName: 'toto', lastName:'tata', mail:'toto@gmail.com', birthDate: new Date("1985/10/10")) | null
-
-
     }
 }

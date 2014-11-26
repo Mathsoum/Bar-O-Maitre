@@ -1,13 +1,16 @@
 package bar.o.maitre
 
 class Bar {
+
     String barName
     String description
     String address
     String type
     String price
-    static hasMany = [likers : Member]
 
+    /*
+    TODO: Faire le lien avec le domaine membre ( constraint, test, controller ...)
+     */
     Member admin
 
     static constraints = {
@@ -17,9 +20,5 @@ class Bar {
         type blank: false, nullable : false
         price blank: false, nullable : false
         admin blank: false, nullable : false
-    }
-
-    String getNbLike(){
-       likers.size()
     }
 }

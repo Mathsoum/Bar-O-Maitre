@@ -61,6 +61,6 @@ class Member {
 
     @Override
     public String toString() {
-        return "$username ($mail)"
+        return username;
     }
 }

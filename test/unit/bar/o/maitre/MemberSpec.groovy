@@ -48,7 +48,7 @@ class MemberSpec extends Specification {
         String string = member.toString()
 
         then: "the string generated is correct"
-        string == "nickname (john.smith@domain.com)"
+        string == "nickname"
     }
 
     def "test equals"(Object member1, Object member2, boolean areEquals) {
