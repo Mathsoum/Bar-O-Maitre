@@ -112,13 +112,20 @@ class BarController {
 
     def like(Bar barInstance) {
         Member currentUser = ((Member) springSecurityService.currentUser)
+        System.out.println("pre : "+currentUser)
+        System.out.println("pre : "+barInstance.likers.size())
+        System.out.println("pre : "+barInstance.getNbLike())
         if (!barInstance.likers.contains(currentUser)){
             barInstance.addToLikers(currentUser)
             flash.message = "+1 Like"
         } else {
             flash.message = "Vous avez déjà liké ce bar"
         }
-
+        barInstance.validate()
+    barInstance.save(true)
+        System.out.println("post : "+currentUser)
+        System.out.println("post : "+barInstance.likers.size())
+        System.out.println("post : "+barInstance.getNbLike())
         redirect action: "show", id: barInstance.id, method: "GET"
     }
 
