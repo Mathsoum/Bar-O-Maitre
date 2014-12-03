@@ -100,73 +100,20 @@ class MemberControllerSpec extends Specification {
     }
 
     void "Test the update action performs an update on a valid domain instance"() {
-        when:"Update is called for a domain instance that doesn't exist"
+        when: "Update is called for a domain instance that doesn't exist"
         request.contentType = FORM_CONTENT_TYPE
-         request.method = 'PUT'
+        request.method = 'PUT'
         controller.update(null)
 
-        then:"A 404 error is returned"
+        then: "A 404 error is returned"
         response.redirectedUrl == '/member/index'
         flash.message != null
 
 
-        when:"An invalid domain instance is passed to the update action"
+        when: "An invalid domain instance is passed to the update action"
         response.reset()
         def member = new Member()
         member.validate()
         controller.update(member)
-
-        then:"The edit view is rendered again with the invalid instance"
-        view == 'edit'
-        model.memberInstance == member
-
-        when:"A valid domain instance is passed to the update action"
-        response.reset()
-        populateValidParams(params)
-        member = new Member(params).save(flush: true)
-        controller.update(member)
-
-        then:"A redirect is issues to the show action"
-        response.redirectedUrl == "/member/show/$member.id"
-        flash.message != null
-    }
-
-    void "Test that the delete action deletes an instance if it exists"() {
-        when:"The delete action is called for a null instance"
-        request.contentType = FORM_CONTENT_TYPE
-         request.method = 'DELETE'
-        controller.delete(null)
-
-        then:"A 404 is returned"
-        response.redirectedUrl == '/member/index'
-        flash.message != null
-
-        when:"A domain instance is created"
-        response.reset()
-        populateValidParams(params)
-        def member = new Member(params).save(flush: true)
-
-        then:"It exists"
-        Member.count() == 1
-
-        when:"The domain instance is passed to the delete action"
-        controller.delete(member)
-
-        then:"The instance is deleted"
-        Member.count() == 0
-        response.redirectedUrl == '/member/index'
-        flash.message != null
-    }
-
-    void "save a null memberInstance = fail"()
-    {
-
-        when:"the null bar is saved"
-        request.contentType = FORM_CONTENT_TYPE
-        controller.save(null)
-
-        then:"A 404 is returned"
-        response.redirectedUrl == '/member/index'
-        flash.message != null
     }
 }
