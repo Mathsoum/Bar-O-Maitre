@@ -65,4 +65,23 @@ class MemberControllerSpec extends Specification {
         then:"A model is populated containing the domain instance"
         model.memberInstance == member
     }
+
+    void "test member rank attribution on null member"()
+    {
+        when: "we try to attribute user role on null obj"
+        controller.attribute_user_role(null)
+
+        then:"nothing is happening"
+        assert true
+    }
+
+    void "test member rank attribution on member"() // TODO
+    {
+        when: "we try to attribute user role on null obj" // TODO
+        populateValidParams(params)
+        def member = new Member(params)
+
+        then:"nothing is happening"
+        assert true
+    }
 }

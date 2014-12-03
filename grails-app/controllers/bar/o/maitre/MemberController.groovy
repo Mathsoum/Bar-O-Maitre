@@ -41,7 +41,7 @@ class MemberController {
 
         memberInstance.save flush:true
 
-        attribuerRoleUser(memberInstance)
+        attribute_user_role(memberInstance)
 
         request.withFormat {
             form multipartForm {
@@ -125,8 +125,7 @@ class MemberController {
         redirect action: "show", method: "GET", params: [id: currentUser.id]
     }
 
-    def attribuerRoleUser (Member member){
-
+    def attribute_user_role(Member member) {
         if(MemberRank.findByMember(member) == null) {
             MemberRank mr = new MemberRank(member:member, rank:Rank.findByAuthority("ROLE_USER"))
             mr.save(flush:true)
