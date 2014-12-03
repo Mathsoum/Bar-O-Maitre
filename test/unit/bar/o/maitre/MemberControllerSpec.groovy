@@ -66,6 +66,7 @@ class MemberControllerSpec extends Specification {
         model.memberInstance == member
     }
 
+  /* TEST TODO !
     void "test member rank attribution on null member"()
     {
         when: "we try to attribute user role on null obj"
@@ -83,5 +84,5 @@ class MemberControllerSpec extends Specification {
 
         then:"nothing is happening"
         assert true
-    }
+    }*/
 }
