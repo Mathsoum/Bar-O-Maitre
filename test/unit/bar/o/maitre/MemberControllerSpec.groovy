@@ -172,4 +172,23 @@ class MemberControllerSpec extends Specification {
         response.redirectedUrl == '/member/index'
         flash.message != null
     }
+
+    void "test add a friend"()
+    {
+      /* TODO, pas evident de tester une methode qui contient springSecurityService.currentUser ...
+        given: "two members given as parameter"
+        populateValidParams(params)
+
+        when: "member get followed by member2"
+        controller.add_as_friend(member2)
+
+        then: "member is followed and show page is returned"
+        response.redirectedUrl == '/member/index'
+        flash.message == "Friend successfully added ! =)"*/
+    }
+
+    void "test delete a friend"()
+    {
+
+    }
 }
