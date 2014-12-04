@@ -119,7 +119,7 @@ class BarController {
             flash.message = "Vous avez déjà liké ce bar"
         }
         barInstance.validate()
-    barInstance.save(true)
+        barInstance.save(true)
         redirect action: "show", id: barInstance.id, method: "GET"
     }
 
