@@ -20,6 +20,14 @@
 	</head>
 	<body>
 		<div id="grailsLogo" role="banner"><a href="http://grails.org"><img src="${resource(dir: 'images', file: 'grails_logo.png')}" alt="Grails"/></a></div>
+    <g:set var="springSecurity" bean="springSecurityService"/>
+    <g:if test="${springSecurity.loggedIn}">
+      Salut <g:link controller="member" action="show" id="${springSecurity.currentUser.id}">${springSecurity.currentUser.username}</g:link> -- <g:link controller="customLogout" action="index">Disconnect</g:link>
+    </g:if>
+    <g:else>
+      <g:link controller="login" action="auth">Login</g:link> -- <g:link controller="member" action="create">Create account</g:link>
+    </g:else>
+
 		<g:layoutBody/>
 		<div class="footer" role="contentinfo"></div>
 		<div id="spinner" class="spinner" style="display:none;"><g:message code="spinner.alt" default="Loading&hellip;"/></div>
