@@ -57,4 +57,11 @@ class MemberRankService {
 
         if (flush) { MemberRank.withSession { it.flush() } }
     }
+
+    void attribute_user_role(Member member) {
+        if(MemberRank.findByMember(member) == null) {
+            MemberRank mr = new MemberRank(member:member, rank:Rank.findByAuthority("ROLE_USER"))
+            mr.save(flush:true)
+        }
+    }
 }
