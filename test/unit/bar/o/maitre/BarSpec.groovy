@@ -10,6 +10,7 @@ import spock.lang.Unroll
 @TestFor(Bar)
 class BarSpec extends Specification {
     Bar barTest
+    Member member = Mock(Member)
 
     def setup() {
         barTest = new Bar()
@@ -51,5 +52,69 @@ class BarSpec extends Specification {
         "test" | "On decrit" | "address" | "Bar a vin" | "" | new Member(username: 'admin', password: 'admin', firstName: 'toto', lastName:'tata', mail:'toto@gmail.com', birthDate: new Date("1985/10/10")) | null
         "test" | "On decrit" | "address" | "Bar a vin" | null | new Member(username: 'admin', password: 'admin', firstName: 'toto', lastName:'tata', mail:'toto@gmail.com', birthDate: new Date("1985/10/10")) | null
         "test" | "On decrit" | "address" | "Bar a vin" | "  " | new Member(username: 'admin', password: 'admin', firstName: 'toto', lastName:'tata', mail:'toto@gmail.com', birthDate: new Date("1985/10/10")) | null
+    }
+
+    /*@Unroll
+    void "test getNbLikes 0 like"() {
+        given:"A bar with 0 like"
+        Bar barTest = new Bar(
+                barName : "Acuda",
+                description : "Poisson",
+                address : "3rd street tuna",
+                type : "Bar tapas",
+                price : "very expensive",
+                admin : new Member(username: 'admin', password: 'admin', firstName: 'toto', lastName:'tata', mail:'toto@gmail.com', birthDate: new Date("1985/10/10"))
+        )
+        barTest.validate()
+        barTest .save(flush: true)
+
+        when:"The number of like is asked"
+        def res = barTest.getNbLike()
+
+        then:"0 like"
+        res == 0
+    }
+
+    @Unroll
+    void "test getNbLikes 1 like"() {
+        given:"A bar with 1 like"
+        Bar barTest = new Bar(
+                barName : "Acuda",
+                description : "Poisson",
+                address : "3rd street tuna",
+                type : "Bar tapas",
+                price : "very expensive",
+                admin : new Member(username: 'admin', password: 'admin', firstName: 'toto', lastName:'tata', mail:'toto@gmail.com', birthDate: new Date("1985/10/10"))
+        )
+        barTest.validate()
+        barTest .save(flush: true)
+        member.validate()
+        //barTest.addToLikers(member)
+        barTest.getLikers().add(member)
+
+        when:"The number of like is asked"
+        def res = barTest.getNbLike()
+
+        then:"1 like"
+        res == 1
+    }*/
+
+    @Unroll
+    void "test toString"() {
+        given:"A bar"
+        Bar barTest = new Bar(
+                barName : "Acuda",
+                description : "Poisson",
+                address : "3rd street tuna",
+                type : "Bar tapas",
+                price : "very expensive",
+                admin : new Member(username: 'admin', password: 'admin', firstName: 'toto', lastName:'tata', mail:'toto@gmail.com', birthDate: new Date("1985/10/10"))
+        )
+
+        when:"The bar's name"
+        def res = barTest.toString()
+
+        then:"Acuda"
+        res == "Acuda"
     }
 }

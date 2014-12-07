@@ -31,8 +31,19 @@ class BarControllerSpec extends Specification {
         springSecurityService.currentUser >> member
         controller.springSecurityService = springSecurityService
     }
+
     void "Test the index action returns the correct model"() {
 
+        when:"The index action is executed"
+        controller.index()
+
+        then:"The model is correct"
+        !model.barInstanceList
+        model.barInstanceCount == 0
+    }
+
+    void "Test the index action with a param max returns the correct model"() {
+        params.max = 20
         when:"The index action is executed"
         controller.index()
 
@@ -178,4 +189,30 @@ class BarControllerSpec extends Specification {
         response.redirectedUrl == '/bar/index'
         flash.message != null
     }
+
+   /* void "like a barInstance with a new member"()
+    {
+        populateValidParams(params)
+        def bar = new Bar(params).save(flush: true)
+
+        when:"the bar is liked"
+        controller.like(bar)
+        then:"A showPage is returned"
+        response.redirectedUrl == '/bar/show'
+        flash.message == "+1 Like"
+    }
+
+    void "like a barInstance with a member who has already liked this bar"()
+    {
+        populateValidParams(params)
+        def bar = new Bar(params).save(flush: true)
+
+        controller.like(bar)
+
+        when:"the bar is liked again"
+        controller.like(bar)
+        then:"A showPage is returned"
+        response.redirectedUrl == '/bar/show'
+        flash.message == "Vous avez déjà liké ce bar"
+    }*/
 }

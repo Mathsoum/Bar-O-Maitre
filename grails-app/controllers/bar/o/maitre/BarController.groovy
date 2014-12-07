@@ -1,5 +1,7 @@
 package bar.o.maitre
 
+import grails.test.mixin.Mock
+
 import static org.springframework.http.HttpStatus.CREATED
 import static org.springframework.http.HttpStatus.OK
 import static org.springframework.http.HttpStatus.NOT_FOUND
@@ -27,10 +29,12 @@ class BarController {
         }
 
         boolean userCanModify = barInstance.admin == springSecurityService.currentUser
+        boolean userCanLike = springSecurityService.isLoggedIn()
         //TODO A user can modify a bar regarding his rank !!
 
         render(view: "show", model: [barInstance: barInstance,
-                                     userCanModify: userCanModify])
+                                     userCanModify: userCanModify,
+                                     userCanLike: userCanLike])
     }
 
     @Secured("ROLE_ADMIN")
@@ -100,18 +104,18 @@ class BarController {
             return
         }
 
-        if (barInstance.admin == springSecurityService.currentUser) {
+        //if (barInstance.admin == springSecurityService.currentUser) {
 
-            barInstance.delete flush: true
+        barInstance.delete flush: true
 
-            request.withFormat {
-                form multipartForm {
-                    flash.message = message(code: 'default.updated.message', args: [message(code: 'bar.label', default: 'Bar'), barInstance.id])
-                    redirect barInstance
-                }
-                '*' { respond barInstance, [status: OK] }
+        request.withFormat {
+            form multipartForm {
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'bar.label', default: 'Bar'), barInstance.id])
+                redirect barInstance
             }
+            '*' { respond barInstance, [status: OK] }
         }
+        //}
     }
 
     def like(Bar barInstance) {
