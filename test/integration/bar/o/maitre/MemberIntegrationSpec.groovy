@@ -13,7 +13,7 @@ import spock.lang.Specification
 @TestFor(Member)
 class MemberIntegrationSpec extends Specification {
 
-    def "test add two users with the same nick"() {
+   def "test add two users with the same nick"() {
         given: "two users with the same nick"
         def firstUser = new Member(
                 username:"mynick",

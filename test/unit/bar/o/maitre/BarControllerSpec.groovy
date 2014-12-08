@@ -190,7 +190,7 @@ class BarControllerSpec extends Specification {
         flash.message != null
     }
 
-   /* void "like a barInstance with a new member"()
+    /*void "like a barInstance with a new member"()
     {
         populateValidParams(params)
         def bar = new Bar(params).save(flush: true)

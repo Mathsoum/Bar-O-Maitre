@@ -1,8 +1,10 @@
 package bar.o.maitre
 
 import grails.test.mixin.TestFor
+import grails.test.mixin.TestMixin
 import spock.lang.Specification
-
+import grails.test.mixin.integration.IntegrationTestMixin
+import grails.test.mixin.services.ServiceUnitTestMixin
 /**
  * See the API for {@link grails.test.mixin.services.ServiceUnitTestMixin} for usage instructions
  */
@@ -20,7 +22,6 @@ class MemberRankServiceIntegrationSpec extends Specification {
             mail: "john.smith@domain.com",
             birthDate: new Date("1/1/1980")
         ).save()
-
         rank = new Rank(
             authority: "ROLE"
         ).save()
@@ -40,7 +41,6 @@ class MemberRankServiceIntegrationSpec extends Specification {
             member: member,
             rank: rank
         ).save(flush: true)
-
         when: "getting it from member and rank"
         def mr = service.get(member.id, rank.id)
 
@@ -111,15 +111,114 @@ class MemberRankServiceIntegrationSpec extends Specification {
         MemberRank.count == count - 1
     }
 
+    def "test remove with member null"() {
+        given: "a persisted instance"
+        new MemberRank(
+                member: member,
+                rank: rank
+        ).save(flush: true)
+
+        and: "the number of instances before creation"
+        def count = MemberRank.count
+
+        when: "removing that instance"
+        service.remove(null, rank, true)
+
+        then: "any instance is removed"
+        MemberRank.count == count
+    }
+
+    def "test remove with rank null"() {
+        given: "a persisted instance"
+        new MemberRank(
+                member: member,
+                rank: rank
+        ).save(flush: true)
+
+        and: "the number of instances before creation"
+        def count = MemberRank.count
+
+        when: "removing that instance"
+        service.remove(member, null, true)
+
+        then: "any instance is removed"
+        MemberRank.count == count
+    }
+
+    def "test remove with flush false"() {
+        given: "a persisted instance"
+        new MemberRank(
+                member: member,
+                rank: rank
+        ).save(flush: true)
+
+        and: "the number of instances before creation"
+        def count = MemberRank.count
+
+        when: "removing that instance"
+        service.remove(member, rank, false)
+
+        then: "the instance is removed from base"
+        MemberRank.count == count-1
+    }
+
+    def "test remove with unknow member"() {
+        given: "a persisted instance"
+        new MemberRank(
+                member: member,
+                rank: rank
+        ).save(flush: true)
+
+        and: "the number of instances before creation"
+        def count = MemberRank.count
+
+        when: "removing that instance"
+        service.remove(new Member(), rank, true)
+
+        then: "the instance is removed from base"
+        MemberRank.count == count
+    }
+
     def "test removeAll member"() {
         given: "a persisted instance"
         new MemberRank(
-            member: member,
-            rank: rank
+                member: member,
+                rank: rank
         ).save(flush: true)
 
         when: "removing that instance"
         service.removeAll(member, true)
+
+        then: "the instance is removed from base"
+        !MemberRank.findByMember(member)
+    }
+
+    def "test removeAll member with u null"() {
+        given: "a persisted instance"
+        new MemberRank(
+                member: member,
+                rank: rank
+        ).save(flush: true)
+
+        and: "the number of instances before creation"
+        def count = MemberRank.count
+
+        when: "removing that instance"
+        service.removeAll((Member)null, true)
+
+        then: "any member was removed"
+        count == MemberRank.count
+    }
+
+    def "test removeAll member with flush false"() {
+        given: "a persisted instance"
+        new MemberRank(
+                member: member,
+                rank: rank
+        ).save(flush: true)
+
+        when: "removing that instance"
+        service.removeAll(member, false)
 
         then: "the instance is removed from base"
         !MemberRank.findByMember(member)
@@ -139,6 +238,37 @@ class MemberRankServiceIntegrationSpec extends Specification {
         !MemberRank.findByRank(rank)
     }
 
+    def "test removeAll rank with r null"() {
+        given: "a persisted instance"
+        new MemberRank(
+                member: member,
+                rank: rank
+        ).save(flush: true)
+
+        and: "the number of instances before creation"
+        def count = MemberRank.count
+
+        when: "removing that instance"
+        service.removeAll((Rank)null, true)
+
+        then: "any rank was removed"
+        count == MemberRank.count
+    }
+
+    def "test removeAll rank with flush false"() {
+        given: "a persisted instance"
+        new MemberRank(
+                member: member,
+                rank: rank
+        ).save(flush: true)
+
+        when: "removing that instance"
+        service.removeAll(rank, false)
+
+        then: "the instance is removed from base"
+        !MemberRank.findByRank(rank)
+    }
+
     def "test attribute_user_role"() {
         given: "a member"
         member
@@ -147,6 +277,19 @@ class MemberRankServiceIntegrationSpec extends Specification {
         service.attribute_user_role(member)
 
         then: "rank is assigned"
+        MemberRank.findByMember(member).rank.authority == "ROLE_USER"
+
+    }
+
+    def "test attribute_user_role with member who already have a rank"() {
+        given: "a member with a rank"
+        member
+        service.attribute_user_role(member)
+
+        when: "attributing again user rank to this member"
+        service.attribute_user_role(member)
+
+        then: "he keep his rank"
         MemberRank.findByMember(member).rank.authority == "ROLE_USER"
 
     }
