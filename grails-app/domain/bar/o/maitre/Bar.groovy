@@ -6,6 +6,7 @@ class Bar {
     String address
     String type
     String price
+    Set<Member> likers = []
     static hasMany = [likers : Member]
     
     Member admin

@@ -1,10 +1,8 @@
 package bar.o.maitre
 
 import grails.test.mixin.TestFor
-import grails.test.mixin.TestMixin
 import spock.lang.Specification
-import grails.test.mixin.integration.IntegrationTestMixin
-import grails.test.mixin.services.ServiceUnitTestMixin
+
 /**
  * See the API for {@link grails.test.mixin.services.ServiceUnitTestMixin} for usage instructions
  */
@@ -22,6 +20,7 @@ class MemberRankServiceIntegrationSpec extends Specification {
             mail: "john.smith@domain.com",
             birthDate: new Date("1/1/1980")
         ).save()
+
         rank = new Rank(
             authority: "ROLE"
         ).save()
@@ -38,9 +37,10 @@ class MemberRankServiceIntegrationSpec extends Specification {
     def "test get"() {
         given: "a persisted MemberRank"
         MemberRank memberRank = new MemberRank(
-            member: member,
-            rank: rank
+                member: member,
+                rank: rank
         ).save(flush: true)
+
         when: "getting it from member and rank"
         def mr = service.get(member.id, rank.id)
 
