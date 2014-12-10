@@ -11,17 +11,12 @@ h1, h2, h3, h4, h5, h6 {
 /* BASE LAYOUT */
 
 html {
-	background-color: #ddd;
-	background-image: -moz-linear-gradient(center top, #aaa, #ddd);
-	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #aaa), color-stop(1, #ddd));
-	background-image: linear-gradient(top, #aaa, #ddd);
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorStr = '#aaaaaa', EndColorStr = '#dddddd');
-	background-repeat: no-repeat;
-	height: 100%;
+	background-color: #ffffff;
+	background-image: -moz-linear-gradient(center top, #ffffff, #ddd);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #ffffff), color-stop(1, #ddd));
+	background-image: linear-gradient(top, #ffffff, #ddd);
+
 	/* change the box model to exclude the padding from the calculation of 100% height (IE8+) */
-	-webkit-box-sizing: border-box;
-	   -moz-box-sizing: border-box;
-	        box-sizing: border-box;
 }
 
 html.no-cssgradients {
@@ -39,23 +34,25 @@ html * {
 body {
 	background: #ffffff;
 	color: #333333;
-	margin: 0 auto;
-	max-width: 960px;
+    height: 100%;
+    min-height: 100%;
+	max-width: 100%;
 	overflow-x: hidden; /* prevents box-shadow causing a horizontal scrollbar in firefox when viewport < 960px wide */
-	   -moz-box-shadow: 0 0 0.3em #255b17;
-	-webkit-box-shadow: 0 0 0.3em #255b17;
-	        box-shadow: 0 0 0.3em #255b17;
 }
 
 #grailsLogo {
-	background-color: #abbf78;
+	background-color: #4C819E;
+}
+
+#controller-list li {
+    margin: 0.25em 0em 0em 1.25em;
 }
 
 /* replace with .no-boxshadow body if you have modernizr available */
 .ie6 body,
 .ie7 body,
 .ie8 body {
-	border-color: #255b17;
+	border-color: #4C819E;
 	border-style: solid;
 	border-width: 0 1px;
 }
@@ -65,7 +62,7 @@ body {
 }
 
 a:link, a:visited, a:hover {
-	color: #48802c;
+	color: #000000;
 }
 
 a:hover, a:active {
@@ -73,7 +70,7 @@ a:hover, a:active {
 }
 
 h1 {
-	color: #48802c;
+	color: #4C819E;
 	font-weight: normal;
 	font-size: 1.25em;
 	margin: 0.8em 0 0.3em 0;
@@ -108,17 +105,16 @@ img {
 }
 
 .footer {
-	background: #abbf78;
+	background: #4C819E;
 	color: #000;
 	clear: both;
 	font-size: 0.8em;
 	margin-top: 1.5em;
 	padding: 1em;
-	min-height: 1em;
 }
 
 .footer a {
-	color: #255b17;
+	color: #4C819E;
 }
 
 .spinner {
@@ -283,7 +279,7 @@ input:focus, select:focus, textarea:focus {
 }
 
 .required-indicator {
-	color: #48802C;
+	color: #4C819E;
 	display: inline-block;
 	font-weight: bold;
 	margin-left: 0.3em;
