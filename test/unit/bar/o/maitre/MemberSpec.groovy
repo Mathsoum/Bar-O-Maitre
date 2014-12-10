@@ -1,25 +1,29 @@
 package bar.o.maitre
 
+import grails.plugin.springsecurity.SpringSecurityService
+import grails.test.mixin.Mock
 import grails.test.mixin.TestFor
 import groovy.time.TimeCategory
+import org.springframework.security.crypto.password.PasswordEncoder
 import spock.lang.Specification
 
 /**
  * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
  */
 @TestFor(Member)
+@Mock([MemberRankService, Rank, SpringSecurityService])
 class MemberSpec extends Specification {
 
-    MemberRankService memberRankService
+    def ranks
 
     def "test that member must be at least 18 years old"() {
         given: "a member"
         Member member = new Member(
-            username: "member",
-            password: "password",
-            firstName: "John",
-            lastName: "Smith",
-            mail: "john.smith@domain.com"
+                username: "member",
+                password: "password",
+                firstName: "John",
+                lastName: "Smith",
+                mail: "john.smith@domain.com"
         )
 
         when: "he is underage (<18)"
@@ -40,8 +44,8 @@ class MemberSpec extends Specification {
     def "test toString"() {
         given: "a member with username and mail"
         Member member = new Member(
-            username: "nickname",
-            mail: "john.smith@domain.com"
+                username: "nickname",
+                mail: "john.smith@domain.com"
         )
 
         when: "getting related string"
@@ -73,19 +77,47 @@ class MemberSpec extends Specification {
         new Integer(42)                                                     | new Member(username: "nickname", mail: "john.smith@domain.com")   | false
     }
 
-    /*def "test getAuthorities"() {
+    def "test getAuthorities"() {
         given: "a member with username and mail and a rank"
         Member member = new Member(
                 username: "nickname",
                 mail: "john.smith@domain.com"
         )
+        Rank rank = new Rank(authority: "admin")
+        rank.validate()
 
-        memberRankService.create(member, adminRole, true)
+        mockDomain(MemberRank,[[member: member, rank: rank]])
 
         when: "getting rank"
-        Set<Rank> rank = member.getAuthorities()
+        ranks = member.getAuthorities()
 
         then: "the number of rank returned is correct"
-        rank.size() == 1
-    }*/
+        ranks.size() == 1
+    }
+
+    def " test before update"(){
+        given:"a member with username and mail and password"
+        Member member = new Member(
+                username: "member",
+                password: "password",
+                firstName: "John",
+                lastName: "Smith",
+                mail: "john.smith@domain.com",
+                birthDate: new Date("1/1/1980")
+        )
+        String newPassword = "newpassword"
+        def springSecurityService = mockFor(SpringSecurityService,true)
+        springSecurityService.demand.encodePassword(){String pwd -> return "ENCODED_PWD"}
+
+        member.springSecurityService = springSecurityService.createMock()
+
+        when:" Update password"
+        member.password = newPassword
+        member.validate()
+        member.save(flush: true, failOnError: true)
+
+        then:"password is encoded"
+        member.springSecurityService != null
+        member.springSecurityService.encodePassword(newPassword) == "ENCODED_PWD"
+    }
 }

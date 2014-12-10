@@ -1,5 +1,6 @@
 package bar.o.maitre
 
+import grails.test.mixin.Mock
 import grails.test.mixin.TestFor
 import spock.lang.Specification
 import spock.lang.Unroll
@@ -8,9 +9,11 @@ import spock.lang.Unroll
  * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
  */
 @TestFor(Bar)
+@Mock([Member])
 class BarSpec extends Specification {
     Bar barTest
     Member member = Mock(Member)
+    def like
 
     def setup() {
         barTest = new Bar()
@@ -71,5 +74,29 @@ class BarSpec extends Specification {
 
         then:"Acuda"
         res == "Acuda"
+    }
+
+    def "test likers"() {
+        given: "a Bar"
+        barTest.barName = "Acuda"
+        barTest.description = "Poisson"
+        barTest.type = "Bar tapas"
+        barTest.price = "very expensive"
+        barTest.address = "3rd street tuna"
+        barTest.admin = new Member(username: 'admin', password: 'admin', firstName: 'toto', lastName:'tata', mail:'toto@gmail.com', birthDate: new Date("1985/10/10"))
+
+
+        // Member member1 = new Member()Member member2 = Mock(Member)
+        member.validate()
+
+        mockDomain(Member,[[member:member]])
+
+        when: "getting rank"
+        barTest.likers.add(member)
+        like = barTest.getNbLike()
+
+
+        then: "the number of rank returned is correct"
+        like.size() == 1
     }
 }
