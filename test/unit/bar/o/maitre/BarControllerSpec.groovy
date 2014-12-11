@@ -192,11 +192,17 @@ class BarControllerSpec extends Specification {
 
     /*void "like a barInstance with a new member"()
     {
+        given: "a Bar"
         populateValidParams(params)
-        def bar = new Bar(params).save(flush: true)
+        def barTest = new Bar(params)
+        // Member member1 = new Member()Member member2 = Mock(Member)
+        member.validate()
+
+        mockDomain(Member,[[member:member]])
+
 
         when:"the bar is liked"
-        controller.like(bar)
+        controller.like(barTest)
         then:"A showPage is returned"
         response.redirectedUrl == '/bar/show'
         flash.message == "+1 Like"
