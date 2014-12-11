@@ -59,9 +59,33 @@ class MemberRankService {
     }
 
     void attribute_user_role(Member member) {
-        if(MemberRank.findByMember(member) == null) {
-            MemberRank mr = new MemberRank(member:member, rank:Rank.findByAuthority("ROLE_USER"))
-            mr.save(flush:true)
-        }
+        this.removeAll(member)
+        MemberRank mr = new MemberRank(member:member, rank:Rank.findByAuthority("ROLE_USER"))
+        mr.save(flush:true)
+    }
+
+    void attribute_adept_role(Member member) {
+        this.removeAll(member)
+        MemberRank mr = new MemberRank(member:member, rank:Rank.findByAuthority("ROLE_ADEPT"))
+        mr.save(flush:true)
+    }
+
+    void attribute_confirmed_role(Member member) {
+        this.removeAll(member)
+        MemberRank mr = new MemberRank(member:member, rank:Rank.findByAuthority("ROLE_CONFIRMED"))
+        mr.save(flush:true)
+
+    }
+
+    void attribute_expert_role(Member member) {
+        this.removeAll(member)
+        MemberRank mr = new MemberRank(member:member, rank:Rank.findByAuthority("ROLE_EXPERT"))
+        mr.save(flush:true)
+    }
+
+    void attribute_admin_role(Member member) {
+        this.removeAll(member)
+        MemberRank mr = new MemberRank(member:member, rank:Rank.findByAuthority("ROLE_ADMIN"))
+        mr.save(flush:true)
     }
 }

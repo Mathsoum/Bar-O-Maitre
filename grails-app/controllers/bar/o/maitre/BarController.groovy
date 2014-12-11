@@ -16,6 +16,7 @@ class BarController {
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     SpringSecurityService springSecurityService
+    MemberService memberService
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -104,8 +105,6 @@ class BarController {
             return
         }
 
-        //if (barInstance.admin == springSecurityService.currentUser) {
-
         barInstance.delete flush: true
 
         request.withFormat {
@@ -115,13 +114,13 @@ class BarController {
             }
             '*' { respond barInstance, [status: OK] }
         }
-        //}
     }
 
     def like(Bar barInstance) {
         Member currentUser = ((Member) springSecurityService.currentUser)
         if (!barInstance.likers.contains(currentUser)){
             barInstance.addToLikers(currentUser)
+            memberService.updateRank(currentUser, 1)
             flash.message = "+1 Like"
         } else {
             flash.message = "Vous avez déjà liké ce bar"

@@ -107,4 +107,5 @@ class MemberIntegrationSpec extends Specification {
         then: "no need to scrambled anything"
         0 * member.springSecurityService.encodePassword(newPassword)
     }
+
 }

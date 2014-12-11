@@ -281,6 +281,55 @@ class MemberRankServiceIntegrationSpec extends Specification {
 
     }
 
+    def "test attribute_adept_role"() {
+        given: "a member"
+        member
+
+        when: "attributing adept rank to this member"
+        service.attribute_adept_role(member)
+
+        then: "rank is assigned"
+        MemberRank.findByMember(member).rank.authority == "ROLE_ADEPT"
+
+    }
+
+    def "test attribute_confirmed_role"() {
+        given: "a member"
+        member
+
+        when: "attributing confirmed rank to this member"
+        service.attribute_confirmed_role(member)
+
+        then: "rank is assigned"
+        MemberRank.findByMember(member).rank.authority == "ROLE_CONFIRMED"
+
+    }
+
+    def "test attribute_expert_role"() {
+        given: "a member"
+        member
+
+        when: "attributing expert rank to this member"
+        service.attribute_expert_role(member)
+
+        then: "rank is assigned"
+        MemberRank.findByMember(member).rank.authority == "ROLE_EXPERT"
+
+    }
+
+    def "test attribute_admin_role"() {
+        given: "a member"
+        member
+
+        when: "attributing admin rank to this member"
+        service.attribute_admin_role(member)
+
+        then: "rank is assigned"
+        MemberRank.findByMember(member).rank.authority == "ROLE_ADMIN"
+
+    }
+
+    /*
     def "test attribute_user_role with member who already have a rank"() {
         given: "a member with a rank"
         member
@@ -292,7 +341,7 @@ class MemberRankServiceIntegrationSpec extends Specification {
         then: "he keep his rank"
         MemberRank.findByMember(member).rank.authority == "ROLE_USER"
 
-    }
+    }*/
 
 }
 

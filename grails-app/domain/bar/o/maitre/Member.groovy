@@ -16,6 +16,7 @@ class Member {
     String mail
     Date birthDate
 
+    int reputation = 0
 	boolean enabled = true
 	boolean accountExpired
 	boolean accountLocked
